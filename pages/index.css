@@ -1,1 +1,18 @@
 @import url("../vendor/normalize.css");
+@import url("../vendor/reset.css");
+
+@import url("../fonts/inter.css");
+
+/* BLOCKS */
+
+@import url("../blocks/page/page.css");
+@import url("../blocks/header/header.css");
+@import url("../blocks/hrz-ruler/hrz-ruler.css");
+
+@import url("../blocks/main/main.css");
+
+@import url("../blocks/footer/footer.css");
+
+/* ELEMENTS */
+
+@import url("../blocks/footer/__content/footer__content.css");
