@@ -10,9 +10,24 @@
 @import url("../blocks/hrz-ruler/hrz-ruler.css");
 
 @import url("../blocks/main/main.css");
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/list-container/list-container.css");
+
+@import url("../blocks/button/button.css");
 
 @import url("../blocks/footer/footer.css");
 
 /* ELEMENTS */
 
+@import url("../blocks/profile/__item/profile__item.css");
+@import url("../blocks/profile/__fig/profile__fig.css");
+@import url("../blocks/profile/__description/profile__description.css");
+@import url("../blocks/profile/__title/profile__title.css");
+@import url("../blocks/profile/__subtitle/profile__subtitle.css");
+
 @import url("../blocks/footer/__content/footer__content.css");
+
+/* MODIFIERS */
+
+@import url("../blocks/button/_edit/button_edit.css");
+@import url("../blocks/button/_add/button_add.css");

@@ -1,0 +1,12 @@
+.profile__description {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+@media screen and (max-width: 431px) {
+  .profile__description {
+    text-align: center;
+  }
+}

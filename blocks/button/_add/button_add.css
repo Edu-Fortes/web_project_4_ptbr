@@ -1,0 +1,19 @@
+.button_add {
+  width: 9.375rem;
+  height: 3.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 722px) {
+  .button_add {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 431px) {
+  .button_add {
+    width: 100%;
+  }
+}

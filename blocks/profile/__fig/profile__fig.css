@@ -1,0 +1,6 @@
+.profile__fig {
+  border-radius: 50%;
+  overflow: hidden;
+  max-width: 7.5rem;
+  height: 7.5rem;
+}
