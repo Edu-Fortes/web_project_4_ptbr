@@ -5,10 +5,3 @@
   justify-content: center;
   align-items: center;
 }
-
-@media screen and (max-width: 430px) {
-  .button_edit {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-}
