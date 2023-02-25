@@ -1,0 +1,9 @@
+.button_close {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  position: relative;
+  left: 2.25rem;
+  bottom: 2.25rem;
+  align-self: flex-end;
+}
