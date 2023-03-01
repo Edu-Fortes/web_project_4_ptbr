@@ -7,3 +7,11 @@
   bottom: 2.25rem;
   align-self: flex-end;
 }
+
+@media screen and (max-width: 590px) {
+  .button_close {
+    left: 0;
+    bottom: 3rem;
+    width: 1.625rem;
+  }
+}
