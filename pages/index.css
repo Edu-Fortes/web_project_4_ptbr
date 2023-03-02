@@ -33,6 +33,8 @@
 @import url("../blocks/place/__content/place__content.css");
 @import url("../blocks/place/__name/place__name.css");
 
+@import url("../blocks/button/__like/button__like.css");
+
 @import url("../blocks/footer/__content/footer__content.css");
 
 @import url("../blocks/popup/__container/popup__conteiner.css");
@@ -44,7 +46,7 @@
 
 @import url("../blocks/button/_edit/button_edit.css");
 @import url("../blocks/button/_add/button_add.css");
-@import url("../blocks/button/_like/button_like.css");
+@import url("../blocks/button/__like/_active/button__like_active.css");
 @import url("../blocks/button/_close/button_close.css");
 @import url("../blocks/button/_save/button_save.css");
 
