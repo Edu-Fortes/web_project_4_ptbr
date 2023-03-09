@@ -6,6 +6,7 @@
   left: 2.25rem;
   bottom: 2.25rem;
   align-self: flex-end;
+  padding: 0;
 }
 
 @media screen and (max-width: 590px) {

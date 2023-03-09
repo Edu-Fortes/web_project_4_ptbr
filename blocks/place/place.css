@@ -1,4 +1,6 @@
 .place {
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.25rem 1.0625rem;
