@@ -5,4 +5,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.2s ease-in;
+}
+
+.button_edit:hover {
+  opacity: 0.6;
 }
