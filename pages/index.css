@@ -25,6 +25,7 @@
 
 /* ELEMENTS */
 
+@import url("../blocks/page/__container/page__container.css");
 @import url("../blocks/profile/__item/profile__item.css");
 @import url("../blocks/profile/__fig/profile__fig.css");
 @import url("../blocks/profile/__description/profile__description.css");
