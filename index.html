@@ -176,7 +176,8 @@
         <p class="footer__content">&copy; 2023 Around The U.S.</p>
       </footer>
 
-      <!-- MODAL -->
+      <!-- MODAL EDITAR PERFIL-->
+
       <section class="popup popup_opened">
         <div class="popup__container">
           <button class="button_close" type="button">
@@ -198,6 +199,33 @@
               placeholder="Sobre mim"
             />
             <button class="button_save" type="submit">Salvar</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- MODAL ADICIONAR CARD -->
+
+      <section class="popup popup_opened">
+        <div class="popup__container">
+          <button class="button_close" type="button">
+            <img
+              src="./images/svg/svg_close.svg"
+              alt="Ícone em forma de um X para fechar a janela de edição de perfil"
+            />
+          </button>
+          <form class="popup__form">
+            <h2 class="popup__title">Novo local</h2>
+            <input
+              class="popup__input popup__input_type_name"
+              type="text"
+              placeholder="Título"
+            />
+            <input
+              class="popup__input popup__input_type_about"
+              type="text"
+              placeholder="Link de imagem"
+            />
+            <button class="button_save" type="submit">Criar</button>
           </form>
         </div>
       </section>

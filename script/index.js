@@ -1,16 +1,27 @@
-const modal = document.querySelector(".popup");
-const closedModal = modal.classList.remove("popup_opened");
+const modals = document.querySelectorAll(".popup");
 
-// ABRE E FECHA O MODAL
+const profileModal = modals[0];
+const placeModal = modals[1];
 
-const openModalBtn = document.querySelector(".button_edit");
-const closeModalBtn = modal.querySelector(".button_close");
+//  FUNÇÃO PARA DEIXAR MODALS FECHADO NO CARREGAMENTO DA PÁGINA
+modals.forEach((item) => {
+  item.classList.remove("popup_opened");
+});
 
-const openCloseModal = function () {
-  modal.classList.toggle("popup_opened");
+//  PEGAR O BOTÃO DE ABRIR EDIÇÃO DE PERFIL
+const openProfileModalBtn = document.querySelector(".button_edit");
+const closeProfileModalBtn = profileModal.querySelector(".button_close");
 
-  const nameInput = modal.querySelector(".popup__input_type_name");
-  const aboutInput = modal.querySelector(".popup__input_type_about");
+//  PEGAR BOTÃO DE ABRIR MODAL ADICIONAR FOTO
+const openPlaceModalBtn = document.querySelector(".button_add");
+const closePlaceModalBtn = placeModal.querySelector(".button_close");
+
+//  FUNÇÃO PARA ABRIR/FECHAR OS MODALS
+const openCloseProfileModal = () => {
+  profileModal.classList.toggle("popup_opened");
+
+  const nameInput = profileModal.querySelector(".popup__input_type_name");
+  const aboutInput = profileModal.querySelector(".popup__input_type_about");
 
   const perfilName = document.querySelector(".profile__title");
   const perfilAbout = document.querySelector(".profile__subtitle");
@@ -19,19 +30,25 @@ const openCloseModal = function () {
   aboutInput.value = perfilAbout.textContent;
 };
 
-openModalBtn.addEventListener("click", openCloseModal);
-closeModalBtn.addEventListener("click", openCloseModal);
+const openClosePlaceModal = () => {
+  placeModal.classList.toggle("popup_opened");
+};
 
-// ENVIA FORMULARIO
+//  EVENT LISTENER NOS BOTÕES DE ABRIR E FECHAR
+openProfileModalBtn.addEventListener("click", openCloseProfileModal);
+closeProfileModalBtn.addEventListener("click", openCloseProfileModal);
 
-const formElement = modal.querySelector(".popup__form");
-const saveBtn = modal.querySelector(".button_save");
+openPlaceModalBtn.addEventListener("click", openClosePlaceModal);
+closePlaceModalBtn.addEventListener("click", openClosePlaceModal);
+
+//  ENVIAR O FORMULARIO DO MODAL EDITAR PERFIL
+const formElement = profileModal.querySelector(".popup__form");
 
 function handleProfileFormSubmit(e) {
   e.preventDefault();
 
-  const nameInput = modal.querySelector(".popup__input_type_name");
-  const aboutInput = modal.querySelector(".popup__input_type_about");
+  const nameInput = profileModal.querySelector(".popup__input_type_name");
+  const aboutInput = profileModal.querySelector(".popup__input_type_about");
 
   const perfilName = document.querySelector(".profile__title");
   const perfilAbout = document.querySelector(".profile__subtitle");
@@ -39,7 +56,15 @@ function handleProfileFormSubmit(e) {
   perfilName.textContent = nameInput.value;
   perfilAbout.textContent = aboutInput.value;
 
-  openCloseModal();
+  openCloseProfileModal();
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
+
+//  ENVIAR FORMULARIO PARA ADICIONAR NOVA FOTO
+
+//  BOTÃO CURTIR ATIVO
+
+//  ZOOM NA FOTO QUANDO CLICAR
+
+//  EXCLUIR POSTAGEM
