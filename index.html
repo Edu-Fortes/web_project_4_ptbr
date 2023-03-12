@@ -216,12 +216,12 @@
           <form class="popup__form">
             <h2 class="popup__title">Novo local</h2>
             <input
-              class="popup__input popup__input_type_name"
+              class="popup__input popup__input_type_place"
               type="text"
               placeholder="Título"
             />
             <input
-              class="popup__input popup__input_type_about"
+              class="popup__input popup__input_type_img"
               type="text"
               placeholder="Link de imagem"
             />
@@ -230,6 +230,30 @@
         </div>
       </section>
     </div>
+
+    <!-- TEMPLATE DO CARD LUGRES -->
+
+    <template id="card-template">
+      <li class="place__card">
+        <figure class="fig">
+          <img
+            class="img"
+            src="./images/places_photo/grand_canion.jpg"
+            alt="Foto do Grand Canyon"
+          />
+        </figure>
+        <div class="place__content">
+          <h2 class="place__name">Grand Canyon</h2>
+          <button class="button" type="button">
+            <img
+              class="button__like button__like_active"
+              src="./images/svg/svg_like.svg"
+              alt="Ícone de coração do botão curtir"
+            />
+          </button>
+        </div>
+      </li>
+    </template>
 
     <!-- SCRIPT -->
     <script src="./script/index.js"></script>

@@ -16,15 +16,16 @@ const closeProfileModalBtn = profileModal.querySelector(".button_close");
 const openPlaceModalBtn = document.querySelector(".button_add");
 const closePlaceModalBtn = placeModal.querySelector(".button_close");
 
+//PEGA CAMPOS DE INFORMAÇÃO DO MODAL EDITAR PERFIL
+const nameInput = profileModal.querySelector(".popup__input_type_name");
+const aboutInput = profileModal.querySelector(".popup__input_type_about");
+
+const perfilName = document.querySelector(".profile__title");
+const perfilAbout = document.querySelector(".profile__subtitle");
+
 //  FUNÇÃO PARA ABRIR/FECHAR OS MODALS
 const openCloseProfileModal = () => {
   profileModal.classList.toggle("popup_opened");
-
-  const nameInput = profileModal.querySelector(".popup__input_type_name");
-  const aboutInput = profileModal.querySelector(".popup__input_type_about");
-
-  const perfilName = document.querySelector(".profile__title");
-  const perfilAbout = document.querySelector(".profile__subtitle");
 
   nameInput.value = perfilName.textContent;
   aboutInput.value = perfilAbout.textContent;
@@ -47,12 +48,6 @@ const formElement = profileModal.querySelector(".popup__form");
 function handleProfileFormSubmit(e) {
   e.preventDefault();
 
-  const nameInput = profileModal.querySelector(".popup__input_type_name");
-  const aboutInput = profileModal.querySelector(".popup__input_type_about");
-
-  const perfilName = document.querySelector(".profile__title");
-  const perfilAbout = document.querySelector(".profile__subtitle");
-
   perfilName.textContent = nameInput.value;
   perfilAbout.textContent = aboutInput.value;
 
@@ -63,6 +58,38 @@ formElement.addEventListener("submit", handleProfileFormSubmit);
 
 //  ENVIAR FORMULARIO PARA ADICIONAR NOVA FOTO
 
+const formPlaceElement = placeModal.querySelector(".popup__form");
+
+function addPlaceCard(e) {
+  e.preventDefault();
+
+  //  PEGAR TEMPLATE DO CARD
+  const placeContainer = document.querySelector(".place");
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate
+    .querySelector(".place__card")
+    .cloneNode(true);
+
+  const placeImg = cardElement.querySelector(".img"); //pega o src da imgem no card para alterar a imgem
+  const cardTitle = cardElement.querySelector(".place__name"); //pega o título do card para aterar
+  const placeNameInput = placeModal.querySelector(".popup__input_type_place"); //pega o campo de inserção do titulo do modal places
+  const imgInput = placeModal.querySelector(".popup__input_type_img"); //pega o campo de input da url da imagem
+
+  cardTitle.textContent = placeNameInput.value;
+  placeImg.src = imgInput.value;
+
+  openClosePlaceModal();
+
+  placeContainer.prepend(cardElement);
+
+  placeNameInput.value = "";
+  imgInput.value = "";
+
+  //deleta ultimo card da lista. Pesquisar como fazer
+  placeContainer.pop();
+}
+
+formPlaceElement.addEventListener("submit", addPlaceCard);
 //  BOTÃO CURTIR ATIVO
 
 //  ZOOM NA FOTO QUANDO CLICAR
