@@ -77,6 +77,7 @@ function addPlaceCard(e) {
 
   cardTitle.textContent = placeNameInput.value;
   placeImg.src = imgInput.value;
+  placeImg.alt = cardTitle.textContent;
 
   openClosePlaceModal();
 
@@ -84,9 +85,6 @@ function addPlaceCard(e) {
 
   placeNameInput.value = "";
   imgInput.value = "";
-
-  //deleta ultimo card da lista. Pesquisar como fazer
-  placeContainer.pop();
 }
 
 formPlaceElement.addEventListener("submit", addPlaceCard);
