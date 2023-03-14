@@ -1,3 +1,51 @@
+//CARREGA OS 6 CARDS INICIAIS
+const initialCards = [
+  {
+    name: "Vale de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+  },
+  {
+    name: "Montanhas Carecas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+  },
+  {
+    name: "Parque Nacional da Vanoise ",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+  },
+];
+
+const placeContainer = document.querySelector(".place");
+
+initialCards.forEach((card) => {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate
+    .querySelector(".place__card")
+    .cloneNode(true);
+
+  const placeImg = cardElement.querySelector(".img"); //pega o src da imgem no card para alterar a imgem
+  const cardTitle = cardElement.querySelector(".place__name"); //pega o título do card para aterar
+
+  cardTitle.textContent = card.name;
+  placeImg.src = card.link;
+  placeImg.alt = "Imagem " + card.name;
+
+  placeContainer.append(cardElement);
+});
+
+//***MODALS***/
+
 const modals = document.querySelectorAll(".popup");
 
 const profileModal = modals[0];
@@ -63,8 +111,7 @@ const formPlaceElement = placeModal.querySelector(".popup__form");
 function addPlaceCard(e) {
   e.preventDefault();
 
-  //  PEGAR TEMPLATE DO CARD
-  const placeContainer = document.querySelector(".place");
+  //  PEGA TEMPLATE DO CARD
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
     .querySelector(".place__card")
