@@ -132,10 +132,32 @@ function addPlaceCard(e) {
 
   placeNameInput.value = "";
   imgInput.value = "";
+
+  const activeLikeBtn = cardElement.querySelector(".button__like");
+
+  activeLikeBtn.classList.remove("button__like_active");
+
+  activeLikeBtn.addEventListener("click", (e) => {
+    e.target.classList.toggle("button__like_active");
+  });
 }
 
 formPlaceElement.addEventListener("submit", addPlaceCard);
+
+//REMOVE O ESTADO ATIVO DO BOTÃO LIKE NO CARREGAMENTO DA PÁGINA
+const likeButton = document.querySelectorAll(".button__like");
+
+likeButton.forEach((button) => {
+  button.classList.remove("button__like_active");
+});
+
 //  BOTÃO CURTIR ATIVO
+
+likeButton.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.target.classList.toggle("button__like_active");
+  });
+});
 
 //  ZOOM NA FOTO QUANDO CLICAR
 
