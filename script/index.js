@@ -1,28 +1,28 @@
 //CARREGA OS 6 CARDS INICIAIS
 const initialCards = [
   {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    name: "Grand Canyon",
+    link: "./images/places_photo/grand_canion.jpg",
   },
   {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    name: "Reprea Hoover",
+    link: "./images/places_photo/hover_dam.jpg",
   },
   {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+    name: "Nova Iorque",
+    link: "./images/places_photo/new_york.jpg",
   },
   {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+    name: "California",
+    link: "./images/places_photo/california_pier.jpg",
   },
   {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+    name: "Las Vegas",
+    link: "./images/places_photo/las_vegas.jpg",
   },
   {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+    name: "San Francisco",
+    link: "./images/places_photo/san_francisco.jpg",
   },
 ];
 
