@@ -21,7 +21,7 @@ const initialCards = [
     link: "./images/places_photo/las_vegas.jpg",
   },
   {
-    name: "San Francisco",
+    name: "São Francisco",
     link: "./images/places_photo/san_francisco.jpg",
   },
 ];
@@ -39,7 +39,7 @@ initialCards.forEach((card) => {
 
   cardTitle.textContent = card.name;
   placeImg.src = card.link;
-  placeImg.alt = "Imagem " + card.name;
+  placeImg.alt = `Imagem ${card.name}`;
 
   placeContainer.append(cardElement);
 });
@@ -50,17 +50,18 @@ const modals = document.querySelectorAll(".popup");
 
 const profileModal = modals[0];
 const placeModal = modals[1];
+const photoModal = modals[2];
 
 //  FUNÇÃO PARA DEIXAR MODALS FECHADO NO CARREGAMENTO DA PÁGINA
 modals.forEach((item) => {
   item.classList.remove("popup_opened");
 });
 
-//  PEGAR O BOTÃO DE ABRIR EDIÇÃO DE PERFIL
+//  PEGAR O BOTÃO DE ABRIR/FECHAR EDIÇÃO DE PERFIL
 const openProfileModalBtn = document.querySelector(".button_edit");
 const closeProfileModalBtn = profileModal.querySelector(".button_close");
 
-//  PEGAR BOTÃO DE ABRIR MODAL ADICIONAR FOTO
+//  PEGAR BOTÃO DE ABRIR/FECHAR MODAL ADICIONAR FOTO
 const openPlaceModalBtn = document.querySelector(".button_add");
 const closePlaceModalBtn = placeModal.querySelector(".button_close");
 
@@ -133,11 +134,11 @@ function addPlaceCard(e) {
   placeNameInput.value = "";
   imgInput.value = "";
 
-  const activeLikeBtn = cardElement.querySelector(".button__like");
+  const likeBtn = cardElement.querySelector(".button__like");
 
-  activeLikeBtn.classList.remove("button__like_active");
+  likeBtn.classList.remove("button__like_active");
 
-  activeLikeBtn.addEventListener("click", (e) => {
+  likeBtn.addEventListener("click", (e) => {
     e.target.classList.toggle("button__like_active");
   });
 }
@@ -160,5 +161,26 @@ likeButton.forEach((button) => {
 });
 
 //  ZOOM NA FOTO QUANDO CLICAR
+//PEGAR "BOTÃO" PARA ABRIR/FECHAR ZOOM NA FOTO
+const openPhotoTrigger = document.querySelectorAll(".img_card");
+const closePhotoBtn = photoModal.querySelector(".button_close");
 
+const openClosePhotoModal = () => {
+  photoModal.classList.toggle("popup_opened");
+
+  getPhotoContent();
+};
+
+openPhotoTrigger.forEach((photo) => {
+  photo.addEventListener("click", openClosePhotoModal);
+});
+
+closePhotoBtn.addEventListener("click", openClosePhotoModal);
+
+function getPhotoContent() {
+  //pegar o src do card places clicado
+  //adicionar src na imagem do popup
+}
 //  EXCLUIR POSTAGEM
+
+//  ANIMAÇÃO ABRIR E FECHAR OS MODALS
