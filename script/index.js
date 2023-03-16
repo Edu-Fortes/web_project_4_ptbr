@@ -109,6 +109,7 @@ formElement.addEventListener("submit", handleProfileFormSubmit);
 
 const formPlaceElement = placeModal.querySelector(".popup__form");
 
+//ADICIONA O CARD DE FOTO
 function addPlaceCard(e) {
   e.preventDefault();
 
@@ -162,25 +163,31 @@ likeButton.forEach((button) => {
 
 //  ZOOM NA FOTO QUANDO CLICAR
 //PEGAR "BOTÃO" PARA ABRIR/FECHAR ZOOM NA FOTO
-const openPhotoTrigger = document.querySelectorAll(".img_card");
+let openPhoto = placeContainer.querySelectorAll(".img_card");
 const closePhotoBtn = photoModal.querySelector(".button_close");
-
+//FUNÇÃO PARA ABRIR O MODAL DAS FOTOS
 const openClosePhotoModal = () => {
   photoModal.classList.toggle("popup_opened");
-
-  getPhotoContent();
+  changePhotoURL();
 };
 
-openPhotoTrigger.forEach((photo) => {
-  photo.addEventListener("click", openClosePhotoModal);
-});
-
+//QUANDO CLICAR NO X FECHA O MODAL DA FOTO
 closePhotoBtn.addEventListener("click", openClosePhotoModal);
 
-function getPhotoContent() {
-  //pegar o src do card places clicado
-  //adicionar src na imagem do popup
-}
+//FUNÇÃO PARA PEGAR A URL DA IMAGEM NO GRID
+let photoSrc;
+openPhoto.forEach((photo) => {
+  photo.addEventListener("click", (e) => {
+    photoSrc = e.target.src;
+    openClosePhotoModal();
+  });
+});
+//MUDA URL DA IMAGEM NO MODAL DE FOTO
+const changePhotoURL = () => {
+  const zoomedPhoto = photoModal.querySelector(".popup__img");
+  zoomedPhoto.src = photoSrc;
+};
+
 //  EXCLUIR POSTAGEM
 
 //  ANIMAÇÃO ABRIR E FECHAR OS MODALS
