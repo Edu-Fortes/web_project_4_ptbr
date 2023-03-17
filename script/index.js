@@ -142,6 +142,8 @@ function addPlaceCard(e) {
   likeBtn.addEventListener("click", (e) => {
     e.target.classList.toggle("button__like_active");
   });
+
+  onCLickOpenPhoto();
 }
 
 formPlaceElement.addEventListener("submit", addPlaceCard);
@@ -163,8 +165,12 @@ likeButton.forEach((button) => {
 
 //  ZOOM NA FOTO QUANDO CLICAR
 //PEGAR "BOTÃO" PARA ABRIR/FECHAR ZOOM NA FOTO
-let openPhoto = placeContainer.querySelectorAll(".img_card");
+let childPlaceNodes = placeContainer.childNodes;
+
+const openPhoto = placeContainer.querySelectorAll(".img_card");
 const closePhotoBtn = photoModal.querySelector(".button_close");
+
+//QUANDO CLICAR NA FOTO ABRIR O MODAL COM A FOTO CLICADA
 //FUNÇÃO PARA ABRIR O MODAL DAS FOTOS
 const openClosePhotoModal = () => {
   photoModal.classList.toggle("popup_opened");
@@ -176,12 +182,17 @@ closePhotoBtn.addEventListener("click", openClosePhotoModal);
 
 //FUNÇÃO PARA PEGAR A URL DA IMAGEM NO GRID
 let photoSrc;
-openPhoto.forEach((photo) => {
-  photo.addEventListener("click", (e) => {
-    photoSrc = e.target.src;
-    openClosePhotoModal();
+function onCLickOpenPhoto() {
+  childPlaceNodes.forEach((photo) => {
+    let img = photo.querySelector(".img_card");
+    img.addEventListener("click", (e) => {
+      photoSrc = e.target.src;
+      openClosePhotoModal();
+    });
   });
-});
+}
+
+onCLickOpenPhoto();
 //MUDA URL DA IMAGEM NO MODAL DE FOTO
 const changePhotoURL = () => {
   const zoomedPhoto = photoModal.querySelector(".popup__img");
