@@ -170,34 +170,45 @@ let childPlaceNodes = placeContainer.childNodes;
 const openPhoto = placeContainer.querySelectorAll(".img_card");
 const closePhotoBtn = photoModal.querySelector(".button_close");
 
-//QUANDO CLICAR NA FOTO ABRIR O MODAL COM A FOTO CLICADA
 //FUNÇÃO PARA ABRIR O MODAL DAS FOTOS
-const openClosePhotoModal = () => {
-  photoModal.classList.toggle("popup_opened");
+const openPhotoModal = () => {
   changePhotoURL();
+  photoModal.classList.add("popup_opened");
+};
+
+//FUNÇÃO PARA FECHAR O MODAL DA FOTO
+const closePhotoModal = () => {
+  changePhotoURL();
+  photoModal.classList.remove("popup_opened");
 };
 
 //QUANDO CLICAR NO X FECHA O MODAL DA FOTO
-closePhotoBtn.addEventListener("click", openClosePhotoModal);
+closePhotoBtn.addEventListener("click", closePhotoModal);
 
-//FUNÇÃO PARA PEGAR A URL DA IMAGEM NO GRID
+//FUNÇÃO PARA PEGAR A URL DA IMAGEM NO GRID E ABRIR A FOTO
 let photoSrc;
 function onCLickOpenPhoto() {
   childPlaceNodes.forEach((photo) => {
     let img = photo.querySelector(".img_card");
     img.addEventListener("click", (e) => {
       photoSrc = e.target.src;
-      openClosePhotoModal();
+      openPhotoModal();
     });
   });
 }
 
+//QUANDO CLICAR NA FOTO ABRIR O MODAL COM A FOTO CLICADA
 onCLickOpenPhoto();
+
 //MUDA URL DA IMAGEM NO MODAL DE FOTO
 const changePhotoURL = () => {
   const zoomedPhoto = photoModal.querySelector(".popup__img");
   zoomedPhoto.src = photoSrc;
 };
+
+//MUDAR A FIGCAPTION QUANDO ABRIR A IMAGEM
+
+//OPACITY DA IMG DO CARD QUANDO HOVER NO TRASH
 
 //  EXCLUIR POSTAGEM
 

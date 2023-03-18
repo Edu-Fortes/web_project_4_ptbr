@@ -1,9 +1,4 @@
 .img_card {
   aspect-ratio: 1/1;
   cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.img_card:hover {
-  opacity: 0.5;
 }

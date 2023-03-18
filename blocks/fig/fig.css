@@ -2,4 +2,9 @@
   display: flex;
   margin: 0;
   background-color: #000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fig:hover {
+  opacity: 0.5;
 }
