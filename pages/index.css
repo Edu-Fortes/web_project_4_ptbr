@@ -33,6 +33,7 @@
 @import url("../blocks/profile/__subtitle/profile__subtitle.css");
 
 @import url("../blocks/place/__card/place__card.css");
+@import url("../blocks/place/__btn-container/place__btn-container.css");
 @import url("../blocks/place/__content/place__content.css");
 @import url("../blocks/place/__name/place__name.css");
 
@@ -55,6 +56,9 @@
 
 @import url("../blocks/button/_edit/button_edit.css");
 @import url("../blocks/button/_add/button_add.css");
+
+@import url("../blocks/button/_trash/button_trash.css");
+
 @import url("../blocks/button/__like/_active/button__like_active.css");
 
 @import url("../blocks/button/_close/button_close.css");
