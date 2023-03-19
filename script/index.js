@@ -250,5 +250,4 @@ function removeCard() {
 
 removeCard();
 
-//AJUSTAR TAMANHO DO HEIGHT DA IMAGEM NO MODAL
 //  ANIMAÇÃO ABRIR E FECHAR OS MODALS
