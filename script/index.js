@@ -145,6 +145,7 @@ function addPlaceCard(e) {
 
   cardOverlay();
   onCLickOpenPhoto();
+  removeCard();
 }
 
 formPlaceElement.addEventListener("submit", addPlaceCard);
@@ -238,5 +239,16 @@ function cardOverlay() {
 cardOverlay();
 
 //  EXCLUIR POSTAGEM
+function removeCard() {
+  childPlaceNodes.forEach((card) => {
+    const trashBtn = card.querySelector(".button_trash");
+    trashBtn.addEventListener("click", (e) => {
+      card.remove();
+    });
+  });
+}
 
+removeCard();
+
+//AJUSTAR TAMANHO DO HEIGHT DA IMAGEM NO MODAL
 //  ANIMAÇÃO ABRIR E FECHAR OS MODALS
