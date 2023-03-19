@@ -5,7 +5,7 @@ const initialCards = [
     link: "./images/places_photo/grand_canion.jpg",
   },
   {
-    name: "Reprea Hoover",
+    name: "Represa Hoover",
     link: "./images/places_photo/hover_dam.jpg",
   },
   {
@@ -39,7 +39,7 @@ initialCards.forEach((card) => {
 
   cardTitle.textContent = card.name;
   placeImg.src = card.link;
-  placeImg.alt = `Imagem ${card.name}`;
+  placeImg.alt = `Imagem de capa da postagem ${card.name}`;
 
   placeContainer.append(cardElement);
 });
@@ -126,7 +126,7 @@ function addPlaceCard(e) {
 
   cardTitle.textContent = placeNameInput.value;
   placeImg.src = imgInput.value;
-  placeImg.alt = cardTitle.textContent;
+  placeImg.alt = `Imagem de capa da postagem ${cardTitle.textContent}`;
 
   openClosePlaceModal();
 
@@ -143,6 +143,7 @@ function addPlaceCard(e) {
     e.target.classList.toggle("button__like_active");
   });
 
+  cardOverlay();
   onCLickOpenPhoto();
 }
 
@@ -172,13 +173,13 @@ const closePhotoBtn = photoModal.querySelector(".button_close");
 
 //FUNÇÃO PARA ABRIR O MODAL DAS FOTOS
 const openPhotoModal = () => {
+  changeFigCaption();
   changePhotoURL();
   photoModal.classList.add("popup_opened");
 };
 
 //FUNÇÃO PARA FECHAR O MODAL DA FOTO
 const closePhotoModal = () => {
-  changePhotoURL();
   photoModal.classList.remove("popup_opened");
 };
 
@@ -187,11 +188,15 @@ closePhotoBtn.addEventListener("click", closePhotoModal);
 
 //FUNÇÃO PARA PEGAR A URL DA IMAGEM NO GRID E ABRIR A FOTO
 let photoSrc;
+let figCaption;
+
 function onCLickOpenPhoto() {
-  childPlaceNodes.forEach((photo) => {
-    let img = photo.querySelector(".img_card");
+  childPlaceNodes.forEach((card) => {
+    const img = card.querySelector(".img_card");
+    const cardTitle = card.querySelector(".place__name").textContent;
     img.addEventListener("click", (e) => {
       photoSrc = e.target.src;
+      figCaption = cardTitle;
       openPhotoModal();
     });
   });
@@ -204,11 +209,33 @@ onCLickOpenPhoto();
 const changePhotoURL = () => {
   const zoomedPhoto = photoModal.querySelector(".popup__img");
   zoomedPhoto.src = photoSrc;
+  zoomedPhoto.alt = `Imagem ampliada da postagem ${figCaption}`;
 };
 
 //MUDAR A FIGCAPTION QUANDO ABRIR A IMAGEM
+const changeFigCaption = () => {
+  const photoCaption = photoModal.querySelector(".popup__figcaption");
+  photoCaption.textContent = figCaption;
+};
 
 //OPACITY DA IMG DO CARD QUANDO HOVER NO TRASH
+function cardOverlay() {
+  childPlaceNodes.forEach((card) => {
+    const overlay = card.querySelector(".fig");
+    const trashBtn = card.querySelector(".button_trash");
+    const opacityValue = 0.5;
+
+    trashBtn.addEventListener("mouseenter", (e) => {
+      overlay.style.setProperty("opacity", opacityValue);
+    });
+
+    trashBtn.addEventListener("mouseleave", (e) => {
+      overlay.style.removeProperty("opacity");
+    });
+  });
+}
+
+cardOverlay();
 
 //  EXCLUIR POSTAGEM
 
