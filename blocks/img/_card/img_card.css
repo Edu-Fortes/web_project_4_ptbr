@@ -1,4 +1,6 @@
 .img_card {
-  aspect-ratio: 1/1;
   cursor: pointer;
+  max-width: 35.25rem;
+  height: 17.625rem;
+  object-fit: cover;
 }

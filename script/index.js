@@ -143,7 +143,7 @@ function addPlaceCard(e) {
     e.target.classList.toggle("button__like_active");
   });
 
-  cardOverlay();
+  applyCardOverlay();
   onCLickOpenPhoto();
   removeCard();
 }
@@ -220,7 +220,7 @@ const changeFigCaption = () => {
 };
 
 //OPACITY DA IMG DO CARD QUANDO HOVER NO TRASH
-function cardOverlay() {
+function applyCardOverlay() {
   childPlaceNodes.forEach((card) => {
     const overlay = card.querySelector(".fig");
     const trashBtn = card.querySelector(".button_trash");
@@ -236,7 +236,7 @@ function cardOverlay() {
   });
 }
 
-cardOverlay();
+applyCardOverlay();
 
 //  EXCLUIR POSTAGEM
 function removeCard() {
