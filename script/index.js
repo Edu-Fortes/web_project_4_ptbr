@@ -249,5 +249,3 @@ function removeCard() {
 }
 
 removeCard();
-
-//  ANIMAÇÃO ABRIR E FECHAR OS MODALS
