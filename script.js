@@ -17,6 +17,8 @@ const place = {
   title: ".place__name",
   inputTitle: ".popup__input_type_place",
   inputImg: ".popup__input_type_img",
+  likeBtn: ".button__like",
+  likeBtnActive: "button__like_active",
 };
 //Object with popup section query elements
 const popup = {
@@ -37,8 +39,6 @@ const placeModal = modals[1];
 const photoModal = modals[2];
 //Global query selector consts
 const profileSection = document.querySelector(profile.section);
-const openProfileBtn = profileSection.querySelector(profile.editBtn); //get button to open modal to edit profile info
-const openPlaceBtn = profileSection.querySelector(place.addBtn); //get button to open modal to add new card
 const inputName = profileModal.querySelector(profile.inputName); //get name input field from the form inside modal to edit profile
 const inputAbout = profileModal.querySelector(profile.inputAbout); // get about field from form inside modal to edit profile
 const perfilName = profileSection.querySelector(profile.perfilName); //get element that contains text who displays pofile name on page
@@ -148,26 +148,62 @@ formElement.forEach((form) => {
 });
 function handleFormSubmit(event) {
   const target = event.target;
+  //Check if the clicked element is the Save button in Profile Modal
   if (target.classList.contains(popup.profileForm)) {
     event.preventDefault();
-    perfilName.textContent = inputName.value;
-    perfilAbout.textContent = inputAbout.value;
-    closeProfileModal();
+    formSubmitProfile(target);
+    return;
   }
+  //Check if clicked element is the Add button in Add Place Modal
   if (target.classList.contains(popup.placeForm)) {
-    event.preventDefault();
-    const cardTemplate = document.querySelector(place.cardTemplate).content;
-    const cardElement = cardTemplate.querySelector(place.card).cloneNode(true);
-    const placeImg = cardElement.querySelector(place.img);
-    const cardTitle = cardElement.querySelector(place.title);
-    const inputCardTitle = placeModal.querySelector(place.inputTitle);
-    const inputCardImg = placeModal.querySelector(place.inputImg);
-    cardTitle.textContent = inputCardTitle.value;
-    placeImg.src = inputCardImg.value;
-    placeImg.alt = `Imagem de capa da postagem ${cardTitle.textContent}`;
-    closePlaceModal();
-    placeContainer.prepend(cardElement);
-    inputCardTitle.value = "";
-    inputCardImg.value = "";
+    event.preventDefault(); //prevents re-load of page on form submition
+    formSubmitAddPlace(target);
+    return;
   }
+}
+function formSubmitProfile() {
+  perfilName.textContent = inputName.value; //change page user name by user input
+  perfilAbout.textContent = inputAbout.value; //change page about info by user input
+  closeProfileModal();
+}
+function formSubmitAddPlace() {
+  const cardTemplate = document.querySelector(place.cardTemplate).content;
+  const cardElement = cardTemplate.querySelector(place.card).cloneNode(true);
+  const placeImg = cardElement.querySelector(place.img);
+  const cardTitle = cardElement.querySelector(place.title);
+  const inputCardTitle = placeModal.querySelector(place.inputTitle);
+  const inputCardImg = placeModal.querySelector(place.inputImg);
+  const likeBtn = cardElement.querySelector(place.likeBtn);
+  cardTitle.textContent = inputCardTitle.value; //card name entered by user
+  placeImg.src = inputCardImg.value; //URL to image
+  placeImg.alt = `Imagem de capa da postagem ${cardTitle.textContent}`;
+  closePlaceModal(); //close modal when submit form due preventDefault function
+  placeContainer.prepend(cardElement); //add card to beginning of grid place
+  inputCardTitle.value = ""; //reset input fields after form submition
+  inputCardImg.value = ""; //reset input field after form submition
+  likeBtn.classList.remove(place.likeBtnActive); //remove initial active state of like button
+  //toggle like button when clicked on it
+  // likeBtn.addEventListener("click", (e) => {
+  //   e.target.classList.toggle(place.likeBtnActive);
+  // });
+}
+//Remove active state of like buttons
+const likeBtn = document.querySelectorAll(place.likeBtn);
+likeBtn.forEach((button) => {
+  button.classList.remove(place.likeBtnActive);
+});
+
+placeContainer.addEventListener("click", handlePlaceContainerClick);
+function handlePlaceContainerClick(event) {
+  const target = event.target;
+  if (target.classList.contains("button__like")) {
+    handleLikeButtonclick(target);
+    return;
+  }
+}
+function handleLikeButtonclick() {
+  const likeBtn = placeContainer.querySelectorAll(place.likeBtn);
+  likeBtn.forEach((button) => {
+    button.classList.toggle(place.likeBtnActive);
+  });
 }
