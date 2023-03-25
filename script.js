@@ -105,6 +105,10 @@ const closeProfileModal = () => {
 const closePlaceModal = () => {
   placeModal.classList.remove(popup.opened);
 };
+const closePhotoModal = () => {
+  photoModal.classList.remove(popup.opened);
+};
+
 /* Event listener for click inside profile section, function will ckeck
  * witch element was clicked and perform an action*/
 profileSection.addEventListener("click", handleProfileSectionClick);
@@ -139,13 +143,16 @@ modals.forEach((modal) => {
 function handleModalsClick(event) {
   const target = event.target;
   if (target.classList.contains("img_button_close")) {
-    closeProfileModal(target) || closePlaceModal(target);
+    closeProfileModal(target);
+    closePlaceModal(target);
+    closePhotoModal(target);
   }
 }
-/*Function to prevent form submit and to change profile info on form submit*/
+//Listener to catch form submition from edit profile and add photo
 formElement.forEach((form) => {
   form.addEventListener("submit", handleFormSubmit);
 });
+//Function to watch witch form was submited
 function handleFormSubmit(event) {
   const target = event.target;
   //Check if the clicked element is the Save button in Profile Modal
@@ -161,11 +168,13 @@ function handleFormSubmit(event) {
     return;
   }
 }
+//Function to change input fieds from profile setion
 function formSubmitProfile() {
   perfilName.textContent = inputName.value; //change page user name by user input
   perfilAbout.textContent = inputAbout.value; //change page about info by user input
   closeProfileModal();
 }
+//Function to enter values to add new card to beginning of place container
 function formSubmitAddPlace() {
   const cardTemplate = document.querySelector(place.cardTemplate).content;
   const cardElement = cardTemplate.querySelector(place.card).cloneNode(true);
@@ -182,28 +191,90 @@ function formSubmitAddPlace() {
   inputCardTitle.value = ""; //reset input fields after form submition
   inputCardImg.value = ""; //reset input field after form submition
   likeBtn.classList.remove(place.likeBtnActive); //remove initial active state of like button
-  //toggle like button when clicked on it
-  // likeBtn.addEventListener("click", (e) => {
-  //   e.target.classList.toggle(place.likeBtnActive);
-  // });
+  onClickOpenPhoto();
+  removeCard();
 }
 //Remove active state of like buttons
 const likeBtn = document.querySelectorAll(place.likeBtn);
-likeBtn.forEach((button) => {
+const likeBtnArray = Array.from(likeBtn); //create an Array from NodeList returned by querySelectorAll
+likeBtnArray.forEach((button) => {
   button.classList.remove(place.likeBtnActive);
 });
-
+//Handler function to watch witch button was clicked inside place container
 placeContainer.addEventListener("click", handlePlaceContainerClick);
 function handlePlaceContainerClick(event) {
   const target = event.target;
+  //Check if clicked element was like button
   if (target.classList.contains("button__like")) {
-    handleLikeButtonclick(target);
+    handleLikeButtonClick(target);
     return;
   }
 }
-function handleLikeButtonclick() {
-  const likeBtn = placeContainer.querySelectorAll(place.likeBtn);
-  likeBtn.forEach((button) => {
-    button.classList.toggle(place.likeBtnActive);
+//Funtion to toggle state of like button (active to deactive and vice versa)
+function handleLikeButtonClick() {
+  event.target.classList.toggle(place.likeBtnActive);
+}
+
+//VERIFICAR APARTIR DAQUI
+const childPlaceNodes = placeContainer.childNodes;
+function forEachCard(callback) {
+  childPlaceNodes.forEach(callback);
+}
+let photoSrc;
+let figCaption;
+function onClickOpenPhoto() {
+  forEachCard((card) => {
+    const img = card.querySelector(place.img);
+    const cardTitle = card.querySelector(place.title).textContent;
+    img.addEventListener("click", (e) => {
+      photoSrc = e.target.src;
+      figCaption = cardTitle;
+      openPhotoModal();
+    });
   });
 }
+onClickOpenPhoto();
+const openPhotoModal = () => {
+  changeFigCaption();
+  changePhotoURL();
+  photoModal.classList.add(popup.opened);
+};
+const changePhotoURL = () => {
+  const zoomedPhoto = photoModal.querySelector(".popup__img");
+  zoomedPhoto.src = photoSrc;
+  zoomedPhoto.alt = `Imagem ampliada da postagem ${figCaption}`;
+};
+const changeFigCaption = () => {
+  const photoCaption = photoModal.querySelector(".popup__figcaption");
+  photoCaption.textContent = figCaption;
+};
+
+//  EXCLUIR POSTAGEM
+function removeCard() {
+  forEachCard((card) => {
+    const trashBtn = card.querySelector(".button_trash");
+    trashBtn.addEventListener("click", (e) => {
+      card.remove();
+    });
+  });
+}
+
+removeCard();
+
+//OPACITY DA IMG DO CARD QUANDO HOVER NO TRASH
+function applyCardOverlay() {
+  forEachCard((card) => {
+    const overlay = card.querySelector(".fig");
+    const trashBtn = card.querySelector(".button_trash");
+    const opacityValue = 0.5;
+
+    trashBtn.addEventListener("mouseenter", (e) => {
+      overlay.style.setProperty("opacity", opacityValue);
+    });
+
+    trashBtn.addEventListener("mouseleave", (e) => {
+      overlay.style.removeProperty("opacity");
+    });
+  });
+}
+applyCardOverlay();
