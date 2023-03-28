@@ -14,11 +14,14 @@ const place = {
   addBtn: ".button_add",
   card: ".place__card",
   img: ".img",
+  photo: "img_card",
   title: ".place__name",
   inputTitle: ".popup__input_type_place",
   inputImg: ".popup__input_type_img",
   likeBtn: ".button__like",
   likeBtnActive: "button__like_active",
+  trashBtn: "button_trash",
+  trashBtnClass: ".button_trash",
 };
 //Object with popup section query elements
 const popup = {
@@ -27,6 +30,8 @@ const popup = {
   formElement: ".popup__form",
   profileForm: "popup__form_profile",
   placeForm: "popup__form_place",
+  img: ".popup__img",
+  figCaption: ".popup__figcaption",
 };
 /* Constants to set each modal returned by NodeList.
  * - One for profile modal - inputs to change profile info
@@ -191,7 +196,6 @@ function formSubmitAddPlace() {
   inputCardTitle.value = ""; //reset input fields after form submition
   inputCardImg.value = ""; //reset input field after form submition
   likeBtn.classList.remove(place.likeBtnActive); //remove initial active state of like button
-  onClickOpenPhoto();
   removeCard();
 }
 //Remove active state of like buttons
@@ -204,66 +208,54 @@ likeBtnArray.forEach((button) => {
 placeContainer.addEventListener("click", handlePlaceContainerClick);
 function handlePlaceContainerClick(event) {
   const target = event.target;
-  //Check if clicked element was like button
+  //Check if clicked element is a like button
   if (target.classList.contains("button__like")) {
     handleLikeButtonClick(target);
     return;
   }
+  //Ckeck if clicked element is a photo
+  if (target.classList.contains(place.photo)) {
+    handleOpenPhoto(target);
+    return;
+  }
+  //Check if clicked element is a trash button
+  if (target.classList.contains(place.trashBtn)) {
+    handleCardEvent(target);
+    return;
+  }
+}
+//Cosolidated forEach loop for chieldNotes in one function that accepts callback
+const childPlaceNodes = placeContainer.childNodes;
+function forEachCard(callback) {
+  childPlaceNodes.forEach(callback);
 }
 //Funtion to toggle state of like button (active to deactive and vice versa)
 function handleLikeButtonClick() {
   event.target.classList.toggle(place.likeBtnActive);
 }
+//Function to open photo modal (zoom) when clicking on a photo
 
-//VERIFICAR APARTIR DAQUI
-const childPlaceNodes = placeContainer.childNodes;
-function forEachCard(callback) {
-  childPlaceNodes.forEach(callback);
-}
+//PRECISA ARRUMAR A CAPTURA DO CARDTITLE
 let photoSrc;
 let figCaption;
-function onClickOpenPhoto() {
-  forEachCard((card) => {
-    const img = card.querySelector(place.img);
-    const cardTitle = card.querySelector(place.title).textContent;
-    img.addEventListener("click", (e) => {
-      photoSrc = e.target.src;
-      figCaption = cardTitle;
-      openPhotoModal();
-    });
-  });
-}
-onClickOpenPhoto();
-const openPhotoModal = () => {
-  changeFigCaption();
-  changePhotoURL();
+function handleOpenPhoto() {
+  const cardTitle = placeContainer.querySelector(place.title).textContent;
+  console.log(cardTitle);
+  photoSrc = event.target.src;
+  figCaption = cardTitle;
   photoModal.classList.add(popup.opened);
-};
-const changePhotoURL = () => {
-  const zoomedPhoto = photoModal.querySelector(".popup__img");
+
+  const zoomedPhoto = photoModal.querySelector(popup.img);
   zoomedPhoto.src = photoSrc;
   zoomedPhoto.alt = `Imagem ampliada da postagem ${figCaption}`;
-};
-const changeFigCaption = () => {
-  const photoCaption = photoModal.querySelector(".popup__figcaption");
+
+  const photoCaption = photoModal.querySelector(popup.figCaption);
   photoCaption.textContent = figCaption;
-};
-
-//  EXCLUIR POSTAGEM
-function removeCard() {
-  forEachCard((card) => {
-    const trashBtn = card.querySelector(".button_trash");
-    trashBtn.addEventListener("click", (e) => {
-      card.remove();
-    });
-  });
 }
-
-removeCard();
 
 //OPACITY DA IMG DO CARD QUANDO HOVER NO TRASH
 function applyCardOverlay() {
-  forEachCard((card) => {
+  childPlaceNodes.forEach((card) => {
     const overlay = card.querySelector(".fig");
     const trashBtn = card.querySelector(".button_trash");
     const opacityValue = 0.5;
@@ -277,4 +269,17 @@ function applyCardOverlay() {
     });
   });
 }
+
 applyCardOverlay();
+
+//  EXCLUIR POSTAGEM
+function removeCard() {
+  childPlaceNodes.forEach((card) => {
+    const trashBtn = card.querySelector(".button_trash");
+    trashBtn.addEventListener("click", (e) => {
+      card.remove();
+    });
+  });
+}
+
+removeCard();
