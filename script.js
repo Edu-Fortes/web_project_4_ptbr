@@ -21,6 +21,9 @@ const place = {
   likeBtn: ".button__like",
   likeBtnActive: "button__like_active",
   trashBtn: ".button_trash",
+  trashBtnElement: "button_trash",
+  fig: ".place__fig",
+  likeBtnElement: "button__like",
 };
 //Object with popup section query elements
 const popup = {
@@ -195,7 +198,9 @@ function formSubmitAddPlace() {
   inputCardTitle.value = ""; //reset input fields after form submition
   inputCardImg.value = ""; //reset input field after form submition
   likeBtn.classList.remove(place.likeBtnActive); //remove initial active state of like button
-  //removeCard();
+  handleCardEvent("click", removeCard);
+  handleCardEvent("mouseenter", applyCardOpacity);
+  handleCardEvent("mouseleave", removeCardOpacity);
 }
 //Remove active state of like buttons
 const likeBtn = document.querySelectorAll(place.likeBtn);
@@ -208,7 +213,7 @@ placeContainer.addEventListener("click", handlePlaceContainerClick);
 function handlePlaceContainerClick(event) {
   const target = event.target;
   //Check if clicked element is a like button
-  if (target.classList.contains("button__like")) {
+  if (target.classList.contains(place.likeBtnElement)) {
     handleLikeButtonClick(target);
     return;
   }
@@ -241,20 +246,39 @@ function handleOpenPhoto(target) {
   zoomedPhoto.alt = `Imagem ampliada da postagem ${figCaption}`;
   photoModal.classList.add(popup.opened); //open photo modal
 }
-
+//Function to handle Events happening inside each card, need a callback function
 function handleCardEvent(eventType, callback) {
   forEachCard((card) => {
     const trashBtn = card.querySelector(place.trashBtn);
     trashBtn.addEventListener(eventType, callback);
   });
 }
-
-function removeCard(e) {
-  const target = e.target;
-  target.closest("li").remove();
+//Callback function to remove a card
+function removeCard(event) {
+  const target = event.target;
+  target.closest(place.card).remove();
+}
+//Callback function to apply opacity effect when hovering over trash button
+function applyCardOpacity(event) {
+  const target = event.target;
+  const cardElement = target.parentElement.parentElement;
+  const overlay = cardElement.querySelector(place.fig);
+  const opacityValue = 0.5;
+  overlay.style.setProperty("opacity", opacityValue);
 }
 
-function applyCardoverlay(e) {
-  const target = e.target;
+//Callback function to remove opacity from imag card
+function removeCardOpacity(event) {
+  const target = event.target;
+  const cardElement = target.parentElement.parentElement;
+  const overlay = cardElement.querySelector(place.fig);
+  const opacityValue = 0.5;
+  overlay.style.removeProperty("opacity");
 }
+//Remove card on trash button click
 handleCardEvent("click", removeCard);
+//Apply opacity on card when hovering trash button
+handleCardEvent("mouseenter", applyCardOpacity);
+//Remove opacity when hovering trash button. Opacity is been applied by CSS
+handleCardEvent("mouseleave", removeCardOpacity);
+//REMOVER CLASSE BLOCO fig, VERIFICAR SE AINDA USA ESSA CLASSE EM ALGUM ELEMENTO.
