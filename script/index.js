@@ -101,21 +101,41 @@ const openProfileModal = () => {
   profileModal.classList.add(popup.opened);
   inputName.value = perfilName.textContent;
   inputAbout.value = perfilAbout.textContent;
+  addKeydownListener();
 };
 const openPlaceModal = () => {
   placeModal.classList.add(popup.opened);
+  addKeydownListener();
 };
 //Functions to close modals
 const closeProfileModal = () => {
   profileModal.classList.remove(popup.opened);
+  removeKeydownListener();
 };
 const closePlaceModal = () => {
   placeModal.classList.remove(popup.opened);
+  removeKeydownListener();
 };
 const closePhotoModal = () => {
   photoModal.classList.remove(popup.opened);
+  removeKeydownListener();
 };
-
+//Function to add keydown listener when popup is opened
+const addKeydownListener = () => {
+  document.addEventListener("keydown", handleKeydown);
+};
+//Function to remove keydown listener when popup closes
+const removeKeydownListener = () => {
+  document.removeEventListener("keydown", handleKeydown);
+};
+//Function to handle keypress (Escape) to close modal
+function handleKeydown(event) {
+  if (event.key === "Escape") {
+    closeProfileModal();
+    closePlaceModal();
+    closePhotoModal();
+  }
+}
 /* Event listener for click inside profile section, function will ckeck
  * witch element was clicked and perform an action*/
 profileSection.addEventListener("click", handleProfileSectionClick);
@@ -157,16 +177,6 @@ function handleModalsClick(event) {
     closeProfileModal(target);
     closePlaceModal(target);
     closePhotoModal(target);
-  }
-}
-//Listen to entiry document for a keypress
-document.addEventListener("keydown", handleKeydown);
-//Function to handle keypress (Escape) to close modal
-function handleKeydown(event) {
-  if (event.key === "Escape") {
-    closeProfileModal();
-    closePlaceModal();
-    closePhotoModal();
   }
 }
 //Listener to catch form submition from edit profile and add photo
@@ -259,6 +269,7 @@ function handleOpenPhoto(target) {
   zoomedPhoto.src = photoSrc;
   zoomedPhoto.alt = `Imagem ampliada da postagem ${figCaption}`;
   photoModal.classList.add(popup.opened); //open photo modal
+  addKeydownListener(); //add listener to close photo with "Esc" press
 }
 //Function to handle Events happening inside each card, need a callback function
 function handleCardEvent(eventType, callback) {
