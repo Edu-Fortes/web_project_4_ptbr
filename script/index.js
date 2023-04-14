@@ -147,12 +147,26 @@ function handleProfileSectionClick(event) {
 modals.forEach((modal) => {
   modal.addEventListener("click", handleModalsClick);
 });
+//Function to handle clicks to close modal
 function handleModalsClick(event) {
   const target = event.target;
-  if (target.classList.contains("img_button_close")) {
+  if (
+    target.classList.contains("img_button_close") ||
+    target.classList.contains("popup")
+  ) {
     closeProfileModal(target);
     closePlaceModal(target);
     closePhotoModal(target);
+  }
+}
+//Listen to entiry document for a keypress
+document.addEventListener("keydown", handleKeydown);
+//Function to handle keypress (Escape) to close modal
+function handleKeydown(event) {
+  if (event.key === "Escape") {
+    closeProfileModal();
+    closePlaceModal();
+    closePhotoModal();
   }
 }
 //Listener to catch form submition from edit profile and add photo
