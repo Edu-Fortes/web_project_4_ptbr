@@ -9,13 +9,14 @@ const formsConfig = {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log(errorElement);
   inputElement.classList.add(formsConfig.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(formsConfig.errorClass);
 };
 
 const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}--error`);
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(formsConfig.inputErrorClass);
   errorElement.classList.remove(formsConfig.errorClass);
   errorElement.textContent = "";
