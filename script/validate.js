@@ -33,21 +33,27 @@ const isValid = (formElement, inputElement) => {
     hideInputError(formElement, inputElement);
   }
 };
-
+/* Function verify if all input fields are valid to activate the form
+ * submit button. Get an array as argument and returns "true" if at least
+ * one field is invalid, and returns "false" if all are valid*/
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 };
-
+/* Function to change button state (disabled to active). In conjuction with
+ * hasInvalidInput function, thi one will change button state*/
 const toggleButtonState = (inputList, buttonElement) => {
+  //If at least one input is invalid
   if (hasInvalidInput(inputList)) {
+    //button inactive
     buttonElement.classList.add(formsConfig.disableClass);
   } else {
+    //else, make button active
     buttonElement.classList.remove(formsConfig.disableClass);
   }
 };
-
+/* Function receives form elements as parameters and add handles in each input field*/
 const setEventListeners = (formElement) => {
   const inputList = Array.from(
     formElement.querySelectorAll(formsConfig.inputSelector)
@@ -65,7 +71,7 @@ const setEventListeners = (formElement) => {
     });
   });
 };
-
+/* Function to find all forms and creates an array of it.*/
 const enableValidation = () => {
   const formList = Array.from(
     document.querySelectorAll(formsConfig.formSelector)
