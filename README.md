@@ -1,6 +1,6 @@
 # EUA Afora
 
-##Sprint project 4, 5 and 6
+## Sprint project 4, 5 and 6
 
 ### Overview
 
