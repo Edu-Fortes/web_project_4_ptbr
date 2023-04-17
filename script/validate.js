@@ -4,7 +4,7 @@ const formsConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: `.button[type="submit"]`,
   inactiveButtonClass: "button_disabled",
-  inputErrorClass: "popup__input_type_error",
+  inputErrorClass: "input_type_error",
   errorClass: "popup__error_visible",
   disableClass: "button_disabled",
 };
