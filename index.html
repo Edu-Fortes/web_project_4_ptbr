@@ -72,18 +72,36 @@
               alt="Ícone em forma de um X para fechar a janela de edição de perfil"
             />
           </button>
-          <form class="popup__form popup__form_profile">
+          <form
+            class="popup__form popup__form_profile"
+            name="editProfile"
+            novalidate
+          >
             <h2 class="popup__title">Editar perfil</h2>
-            <input
-              class="popup__input popup__input_type_name"
-              type="text"
-              placeholder="Nome"
-            />
-            <input
-              class="popup__input popup__input_type_about"
-              type="text"
-              placeholder="Sobre mim"
-            />
+            <fieldset class="popup__input-container">
+              <input
+                id="name-input"
+                class="popup__input popup__input_type_name"
+                required
+                type="text"
+                placeholder="Nome"
+                minlength="2"
+                maxlength="40"
+              />
+              <span class="name-input-error popup__input_type_error"></span>
+            </fieldset>
+            <fieldset class="popup__input-container">
+              <input
+                id="about-input"
+                class="popup__input popup__input_type_about"
+                required
+                type="text"
+                placeholder="Sobre mim"
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="about-input-error popup__input_type_error"></span>
+            </fieldset>
             <button class="button button_save" type="submit">Salvar</button>
           </form>
         </div>
@@ -100,18 +118,34 @@
               alt="Ícone em forma de um X para fechar a janela de edição de perfil"
             />
           </button>
-          <form class="popup__form popup__form_place">
+          <form
+            class="popup__form popup__form_place"
+            name="addPlace"
+            novalidate
+          >
             <h2 class="popup__title">Novo local</h2>
-            <input
-              class="popup__input popup__input_type_place"
-              type="text"
-              placeholder="Título"
-            />
-            <input
-              class="popup__input popup__input_type_img"
-              type="text"
-              placeholder="Link de imagem"
-            />
+            <fieldset class="popup__input-container">
+              <input
+                id="title-input"
+                class="popup__input popup__input_type_place"
+                maxlength="30"
+                minlength="2"
+                required
+                type="text"
+                placeholder="Título"
+              />
+              <span class="title-input-error"></span>
+            </fieldset>
+            <fieldset class="popup__input-container">
+              <input
+                id="url-input"
+                class="popup__input popup__input_type_img"
+                required
+                type="url"
+                placeholder="Link de imagem"
+              />
+              <span class="url-input-error"></span>
+            </fieldset>
             <button class="button button_save" type="submit">Criar</button>
           </form>
         </div>
@@ -150,7 +184,7 @@
 
     <section class="popup popup_opened">
       <div class="popup__photo-container">
-        <button class="button button_close" type="button">
+        <button class="button button_close button_close_photo" type="button">
           <img
             class="img img_button_close"
             src="./images/svg/svg_close.svg"
@@ -166,5 +200,6 @@
 
     <!-- SCRIPT -->
     <script src="./script/index.js"></script>
+    <script src="./script/validate.js"></script>
   </body>
 </html>

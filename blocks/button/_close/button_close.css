@@ -2,6 +2,7 @@
   border: none;
   position: relative;
   left: 2.25rem;
+  bottom: 2.25rem;
   align-self: flex-end;
   padding: 0;
   transition: opacity 0.2s ease-in;
@@ -14,6 +15,5 @@
 @media screen and (max-width: 442px) {
   .button_close {
     left: 0;
-    width: 1.625rem;
   }
 }

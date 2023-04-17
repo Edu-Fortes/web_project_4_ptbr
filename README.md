@@ -1,27 +1,31 @@
-# Projeto 4 e Projeto 5:  EUA Afora
+# EUA Afora
 
-### Visão geral
+## Sprint project 4, 5 and 6
 
-- Sobre
+### Overview
+
+- About
 - Figma
-- Website projeto compluído
+- Finished Webpage Link
 
-**Sobre**
+**About**
 
-Esse é o projeto número 4 e projeto número 5 do bootcamp Web Developer da Practicum. Nele foi proposto a reprodução da página seguindo o layout do projeto no Figma, você encontra o link para o projeto mais abaixo.
+This is the Sprint 4, 5 and 6 project of Practicum Web Developer Bootcamp. The intent of this project was to recreate the page following pages layout designed on Figma, where you can find the link below.
 
-Trata-se de uma página de perfil do tipo rede social onde o usuario adiciona "cards" para os lugares que visiou ao redor dos Estados Undidos (E.U.A).
+This project is all about a social media like page where the user can share "cards" of places visited inside United States of America (U.S.A).
 
-Para esse projeto foi utilizado linguagem HTML, CSS e JavaScrip.
+In this project the HTML, CSS and JavaScript language was used.
 
-A programação JavaSpcript foi utilzada para implementar as intereções de edição do perfil, adição de novo card, botão de "curtir" e exclusão de qualquer um dos "cards". Vale resaltar que não foi feito nenhuma programação back-end, ou seja, depois de realizado a interação na página e a mesma é atualizada, as informações voltam para seu estado padrão, elas não são salvas.
+The JavaScript part of the project was implemented to create user interaction with the page, like to edit profile section, to add a new place card and to delete it, to give a "like" on a place and finally to validate the forms input. worth mentioning that no Back-end coding was implemented, therefore when the page is refreshed, the hole page comes back to its original state, the changes are not stored.
 
 **Figma**
 
-- [Link para o projeto no Figma](https://www.figma.com/file/XfB6BSINvliub43JgKza1e/WEB.-Sprint-4.-Around-The-U.S.-desktop-%2B-mobile-pt)
+- [Figma project layout](https://www.figma.com/file/XfB6BSINvliub43JgKza1e/WEB.-Sprint-4.-Around-The-U.S.-desktop-%2B-mobile-pt)
 
-**Website projeto concluído**
+**Finished Webpage**
 
-Clique no link abaixo e acesse o website do projeto concluído:
+Click on the link below to visit the finished page:
 
 - [Website EUA Afora](https://edu-fortes.github.io/web_project_4_ptbr/)
+
+Hope you enjoy it ;)
