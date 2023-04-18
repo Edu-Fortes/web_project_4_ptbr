@@ -21,7 +21,6 @@
 @import url("../blocks/footer/footer.css");
 
 @import url("../blocks/popup/popup.css");
-
 /* ELEMENTS */
 
 @import url("../blocks/page/__container/page__container.css");
@@ -76,4 +75,4 @@
 
 @import url("../blocks/popup/__error/popup__error_visible.css");
 
-@import url("../blocks/input/_type/input_type_error.css");
+@import url("../blocks/input-error/input-error.css");
