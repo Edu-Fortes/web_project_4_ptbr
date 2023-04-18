@@ -74,7 +74,6 @@
 
 @import url("../blocks/popup/_opened/popup_opened.css");
 
-@import url("../blocks/popup/__input/_type/popup__input_type_error.css");
 @import url("../blocks/popup/__error/popup__error_visible.css");
 
 @import url("../blocks/input/_type/input_type_error.css");
