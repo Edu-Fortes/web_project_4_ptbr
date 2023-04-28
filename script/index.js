@@ -306,4 +306,3 @@ handleCardEvent("click", removeCard);
 handleCardEvent("mouseenter", applyCardOpacity);
 //Remove opacity when hovering trash button. Opacity is been applied by CSS
 handleCardEvent("mouseleave", removeCardOpacity);
-//REMOVER CLASSE BLOCO fig, VERIFICAR SE AINDA USA ESSA CLASSE EM ALGUM ELEMENTO.
