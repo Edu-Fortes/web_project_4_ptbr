@@ -84,18 +84,7 @@ const initialCards = [
   },
 ]; //Array with initial cards info to be loaded on page startup
 const placeContainer = document.querySelector(place.container);
-/* Get information from initialCard Array and construct a card with it.
- * Loop trought each object inside the array*/
-initialCards.forEach((card) => {
-  const cardTemplate = document.querySelector(place.cardTemplate).content;
-  const cardElements = cardTemplate.querySelector(place.card).cloneNode(true);
-  const placeImg = cardElements.querySelector(place.img);
-  const cardTitle = cardElements.querySelector(place.title);
-  cardTitle.textContent = card.name;
-  placeImg.src = card.link;
-  placeImg.alt = `Imagem de capa da postagem ${card.name}`;
-  placeContainer.append(cardElements);
-});
+
 //Function to open modals
 const openProfileModal = () => {
   profileModal.classList.add(popup.opened);

@@ -1,3 +1,4 @@
+import Card from "./Card.js";
 const initialCards = [
   {
     name: "Grand Canyon",
@@ -35,68 +36,12 @@ const profileModal = modals[0];
 const placeModal = modals[1];
 const photoModal = modals[2];
 
-//Global query selector consts
-const photoPopupImage = photoModal.querySelector(".popup__img");
-const photoPopupCaption = photoModal.querySelector(".popup__figcaption");
-const photoCloseButton = photoModal.querySelector(".img_button_close");
-const cardImage = modals.forEach((modal) => {
+//Close all modals on page loading
+modals.forEach((modal) => {
   modal.classList.remove("popup_opened");
 });
 
-class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._cardSelector = cardSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".place__card")
-      .cloneNode(true);
-
-    return cardElement;
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListener();
-
-    this._element.querySelector(".place__name").textContent = this._name;
-    this._element.querySelector(".img").src = this._link;
-    this._element.querySelector(
-      ".img"
-    ).alt = `Imagem de capa da postagem ${this._name}`;
-
-    return this._element;
-  }
-
-  _handleOpenPhoto() {
-    photoPopupImage.src = this._link;
-    photoPopupImage.alt = `Imagem ampliada da postagem ${this._name}`;
-    photoPopupCaption.textContent = photoPopupImage.alt.slice(27);
-
-    photoModal.classList.add("popup_opened");
-  }
-
-  _handleClosePhoto() {
-    photoPopupImage.src = "";
-    photoModal.classList.remove("popup_opened");
-  }
-
-  _setEventListener() {
-    this._element.querySelector(".img").addEventListener("click", () => {
-      this._handleOpenPhoto();
-    });
-
-    photoCloseButton.addEventListener("click", () => {
-      this._handleClosePhoto();
-    });
-  }
-}
-
-/* forEach function to create initial 6 cards from initialCards object */
+//Create initial 6 cards from initialCards object
 initialCards.forEach((object) => {
   const card = new Card(object, "#card-template");
   const cardElement = card.generateCard();
