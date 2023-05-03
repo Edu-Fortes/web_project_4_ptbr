@@ -8,9 +8,11 @@ const profileModal = modals[0];
 const placeModal = modals[1];
 const photoModal = modals[2];
 
-//Close all modals on page loading
 modals.forEach((modal) => {
+  //Close all modals on page loading
   modal.classList.remove("popup_opened");
+  //Look for event to close photo modal
+  modal.addEventListener("click", handleModalsClick);
 });
 
 function handleModalsClick(event) {
@@ -21,7 +23,3 @@ function handleModalsClick(event) {
     event.target.closest(".popup").classList.remove("popup_opened");
   }
 }
-
-modals.forEach((modal) => {
-  modal.addEventListener("click", handleModalsClick);
-});
