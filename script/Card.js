@@ -49,25 +49,23 @@ export default class Card {
     photoModal.classList.add("popup_opened");
   }
 
-  // _handleCardOpacity(event) {
-  //   const overlay = this._element.querySelector(".place__fig");
-  //   if (event.target === "mouseenter") {
-  //     overlay.style.setProperty("opacity", 0.5);
-  //     return;
-  //   }
-  //   if (event.target === "mouseleave") {
-  //     overlay.style.removeProperty("opacity");
-  //     return;
-  //   }
-  // }
-
-  // _handleTrashButtonEvent(eventType, callback) {
-  //   const trashBtn = this._element.querySelector(".button_trash");
-  //   trashBtn.addEventListener(eventType, callback);
-  // }
-
-  // _handleTrashButtonEvent("mouseenter", _handleCardOpacity);
-  // _handleTrashButtonEvent("mouseleave", _handleCardOpacity);
+  _handleCardEvent(eventType) {
+    this._element
+      .querySelector(".button_trash")
+      .addEventListener(eventType, () => {
+        const overlay = this._element.querySelector(".place__fig");
+        //check if mouse is entering trash button
+        if (eventType === "mouseenter") {
+          overlay.style.setProperty("opacity", 0.5);
+          return;
+        }
+        //check if mouse is leaving trash button
+        if (eventType === "mouseleave") {
+          overlay.style.removeProperty("opacity");
+          return;
+        }
+      });
+  }
 
   _setEventListener() {
     //add listener for CLICK inside each card
@@ -83,14 +81,8 @@ export default class Card {
         return;
       }
     });
-
-    // const trashBtn = this._element.querySelector(".button_trash");
-    // // add listener to control card opacity when hovering over the trash button
-    // trashBtn.addEventListener("mouseenter", (event) => {
-    //   if (event.target.classList.contains("button_trash")) {
-    //     this._handleCardOpacity("mouseenter");
-    //     this._handleCardOpacity("mouseleave");
-    //   }
-    // });
+    //add listener on trash button when hovering it to control card's opacity
+    this._handleCardEvent("mouseenter");
+    this._handleCardEvent("mouseleave");
   }
 }
