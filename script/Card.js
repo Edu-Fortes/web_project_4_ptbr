@@ -38,18 +38,7 @@ export default class Card {
       .classList.toggle("button__like_active");
   }
 
-  _openPhoto() {
-    const photoModal = document.querySelector("#modal-photo");
-    const photoElement = photoModal.querySelector(".popup__img");
-    const photoCaption = photoModal.querySelector(".popup__figcaption");
-
-    photoElement.src = this._link;
-    photoElement.alt = `Imagem ampliada da postagem ${this._name}`;
-    photoCaption.textContent = photoElement.alt.slice(27);
-    photoModal.classList.add("popup_opened");
-  }
-
-  _handleCardEvent(eventType) {
+  _handleTrashBtnEvent(eventType) {
     this._element
       .querySelector(".button_trash")
       .addEventListener(eventType, () => {
@@ -75,14 +64,9 @@ export default class Card {
         this._like();
         return;
       }
-      //check if clicked element is a photo
-      if (event.target.classList.contains("img_card")) {
-        this._openPhoto();
-        return;
-      }
     });
     //add listener on trash button when hovering it to control card's opacity
-    this._handleCardEvent("mouseenter");
-    this._handleCardEvent("mouseleave");
+    this._handleTrashBtnEvent("mouseenter");
+    this._handleTrashBtnEvent("mouseleave");
   }
 }
