@@ -71,11 +71,9 @@ function getModalImage(event) {
 function handleKeydownListener(action) {
   if (action === "addListener") {
     document.addEventListener("keydown", handleCloseModal);
-    console.log("added listener");
   }
   if (action === "removeListener") {
     document.removeEventListener("keydown", handleCloseModal);
-    console.log("listener removed");
   }
 }
 
@@ -89,11 +87,8 @@ function handleCloseModal(event) {
     handleKeydownListener("removeListener");
   }
   if (event.key === "Escape") {
-    //this target gets the hole document. Closes the photo modal
-    event.target
-      .querySelector(".popup_opened")
-      .classList.remove("popup_opened");
+    //this target gets the hole document. Closes modals on "ESC" keypress
+    document.querySelector(".popup_opened").classList.remove("popup_opened");
     handleKeydownListener("removeListener");
-    console.log(event.target);
   }
 }
