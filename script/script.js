@@ -34,3 +34,61 @@ initialCards.forEach((object) => {
 
   document.querySelector(".place").append(cardElement);
 });
+
+//listeners for submit
+
+const formElement = document.querySelectorAll(".popup__form");
+
+formElement.forEach((form) => {
+  form.addEventListener("submit", handleFormSubmit);
+});
+
+function handleFormSubmit(event) {
+  const target = event.target;
+
+  if (target.classList.contains("popup__form_profile")) {
+    event.preventDefault();
+    formSubmitProfile(target);
+    target.closest(".popup").classList.remove("popup_opened");
+    return;
+  }
+
+  if (target.classList.contains("popup__form_place")) {
+    event.preventDefault();
+    formSubmitAddPlace(target);
+    target.closest(".popup").classList.remove("popup_opened");
+    return;
+  }
+}
+
+function formSubmitProfile() {
+  const profileSection = document.querySelector(".profile");
+  const perfilName = profileSection.querySelector(".profile__title");
+  const perfilAbout = profileSection.querySelector(".profile__subtitle");
+  const profileModal = document.querySelectorAll(".popup")[0];
+  const inputName = profileModal.querySelector(".popup__input_type_name");
+  const inputAbout = profileModal.querySelector(".popup__input_type_about");
+
+  perfilName.textContent = inputName.value;
+  perfilAbout.textContent = inputAbout.value;
+}
+
+function formSubmitAddPlace() {
+  const addedCardData = {};
+  const placeModal = document.querySelectorAll(".popup")[1];
+  const inputCardTitle = placeModal.querySelector(".popup__input_type_place");
+  const inputCardImg = placeModal.querySelector(".popup__input_type_img");
+
+  addedCardData.name = inputCardTitle.value;
+  addedCardData.link = inputCardImg.value;
+
+  const newCard = new Card(addedCardData, "#card-template");
+  const newCardElement = newCard.generateCard();
+
+  document.querySelector(".place").prepend(newCardElement);
+
+  inputCardTitle.value = "";
+  inputCardImg.value = "";
+}
+
+//delete cards

@@ -41,6 +41,7 @@ function handleOpenModal(event) {
     inputAbout.value = perfilAbout.textContent;
     profileModal.classList.add("popup_opened");
     handleKeydownListener("addListener");
+    return;
   }
   //check if clicked button is the plus button (add new card)
   if (
@@ -50,6 +51,7 @@ function handleOpenModal(event) {
     //open modal to add new place
     placeModal.classList.add("popup_opened");
     handleKeydownListener("addListener");
+    return;
   }
   // check if clicked element is a photo (photo modal)
   if (event.target.classList.contains("img_card")) {
@@ -57,6 +59,7 @@ function handleOpenModal(event) {
     getModalImage(event);
     photoModal.classList.add("popup_opened");
     handleKeydownListener("addListener");
+    return;
   }
 }
 
@@ -71,9 +74,11 @@ function getModalImage(event) {
 function handleKeydownListener(action) {
   if (action === "addListener") {
     document.addEventListener("keydown", handleCloseModal);
+    return;
   }
   if (action === "removeListener") {
     document.removeEventListener("keydown", handleCloseModal);
+    return;
   }
 }
 
@@ -85,10 +90,12 @@ function handleCloseModal(event) {
     //this target gets the button who opened the modal. Closes Profile and Add Card Modal
     event.target.closest(".popup").classList.remove("popup_opened");
     handleKeydownListener("removeListener");
+    return;
   }
   if (event.key === "Escape") {
     //this target gets the hole document. Closes modals on "ESC" keypress
     document.querySelector(".popup_opened").classList.remove("popup_opened");
     handleKeydownListener("removeListener");
+    return;
   }
 }
