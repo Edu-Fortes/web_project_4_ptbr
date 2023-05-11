@@ -92,3 +92,13 @@ function formSubmitAddPlace() {
 }
 
 //delete cards
+const placeSection = document.querySelector(".places");
+
+placeSection.addEventListener("click", handleRemoveCard);
+
+function handleRemoveCard(event) {
+  if (event.target.classList.contains("button__image")) {
+    event.target.closest(".place__card").remove();
+    return;
+  }
+}
