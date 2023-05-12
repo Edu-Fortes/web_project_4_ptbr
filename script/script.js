@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 const initialCards = [
   {
@@ -102,3 +103,22 @@ function handleRemoveCard(event) {
     return;
   }
 }
+
+//Validate forms
+
+const formsConfig = {
+  // formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: `.button[type="submit"]`,
+  inactiveButtonClass: "button_disabled",
+  inputErrorClass: "input_type_error",
+  errorClass: "popup__error_visible",
+  disableClass: "button_disabled",
+};
+
+const formList = Array.from(document.querySelectorAll(".popup__form"));
+
+formList.forEach((formElement) => {
+  const form = new FormValidator(formsConfig, ".popup__form");
+  const validateForm = form.enableValidation(formElement);
+});

@@ -1,97 +1,93 @@
-//configuration object
-const formsConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: `.button[type="submit"]`,
-  inactiveButtonClass: "button_disabled",
-  inputErrorClass: "input_type_error",
-  errorClass: "popup__error_visible",
-  disableClass: "button_disabled",
-};
+/*O construtor deve usar um objeto de configuração que armazena seletores
+e classes de formulário.
 
-class FormValidator {
-  constructor(data, formElement) {
-    this._formSelector = data.formSelector;
+O construtor deve ter como base o elemento HTML do formulário para ser
+validado.
+//
+
+Possui métodos privados para processar o formulário. Em cada método,
+é necessário fazer menção ao campo de classe, e não passá-lo para cada
+método, como foi implementado anteriormente.
+
+Possui um método público enableValidation() . Chamar depois de criar uma
+instância de classe.*/
+
+export default class FormValidator {
+  constructor(data, formSelector) {
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
-    this._inactiveButtonClass = data.inactiveButtonClass;
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
+    this._formSelector = formSelector;
     this._disableClass = data.disableClass;
-    this._formElement = formElement;
   }
 
-  /* Function to show error when the input field do not agree with
-   * validation parameters. Accepst as parameters the Form element,
-   * Input element and the Error Message */
-  _showInputError = (formElement, inputElement, errorMessage) => {
+  _getFormElement() {
+    const formElement = document.querySelector(this._formSelector);
+    return formElement;
+  }
+
+  _showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(formsConfig.inputErrorClass);
+    inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(formsConfig.errorClass);
-  };
-  /* Function to hide error when the input field agree with
-   * validation parameters. */
-  hideInputError = (formElement, inputElement) => {
+    errorElement.classList.add(this._errorClass);
+  }
+
+  _hideInputError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(formsConfig.inputErrorClass);
-    errorElement.classList.remove(formsConfig.errorClass);
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
-  };
-  /* Fucntion to check if the error messagem should be showed  or not*/
-  isValid = (formElement, inputElement) => {
-    if (!inputElement.validity.valid) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
+  }
+
+  _isValid(formElement, inputElement) {
+    if (!inputElement.validityvalid) {
+      this._showInputError(
+        formElement,
+        inputElement,
+        inputElement.validationMessage
+      );
     } else {
-      hideInputError(formElement, inputElement);
+      this._hideInputError(formElement, inputElement);
     }
-  };
-  /* Function verify if all input fields are valid to activate the form
-   * submit button. Get an array as argument and returns "true" if at least
-   * one field is invalid, and returns "false" if all are valid*/
-  hasInvalidInput = (inputList) => {
+  }
+
+  _hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
-  };
-  /* Function to change button state (disabled to active). In conjuction with
-   * hasInvalidInput function, thi one will change button state*/
-  toggleButtonState = (inputList, buttonElement) => {
-    //If at least one input is invalid
-    if (hasInvalidInput(inputList)) {
-      //button inactive
-      buttonElement.classList.add(formsConfig.disableClass);
-    } else {
-      //else, make button active
-      buttonElement.classList.remove(formsConfig.disableClass);
-    }
-  };
-  /* Function receives form elements as parameters and add handles in each input field*/
-  setEventListeners = (formElement) => {
-    const inputList = Array.from(
-      formElement.querySelectorAll(formsConfig.inputSelector)
-    );
-    const buttonElement = formElement.querySelector(
-      formsConfig.submitButtonSelector
-    );
+  }
 
-    toggleButtonState(inputList, buttonElement);
+  _toggleButtonState(inputList, buttonElement) {
+    if (this._hasInvalidInput(inputList)) {
+      buttonElement.classList.add(this._disableClass);
+    } else {
+      buttonElement.classList.remove(this._disableClass);
+    }
+  }
+
+  _setEventListener(formElement) {
+    const inputList = Array.from(
+      formElement.querySelectorAll(this._inputSelector)
+    );
+    const buttonElement = formElement.querySelector(this._submitButtonSelector);
+
+    this._toggleButtonState(inputList, buttonElement);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        isValid(formElement, inputElement);
-        toggleButtonState(inputList, buttonElement);
+        this._isValid(formElement, inputElement);
+        this._toggleButtonState(inputList, buttonElement);
       });
     });
-  };
-  /* Function to find all forms and creates an array of it.*/
+  }
+
   enableValidation = () => {
-    const formList = Array.from(
-      document.querySelectorAll(formsConfig.formSelector)
-    );
+    const formList = Array.from(document.querySelectorAll(this._formSelector));
 
     formList.forEach((formElement) => {
-      setEventListeners(formElement);
+      this._setEventListener(formElement);
     });
   };
 }
