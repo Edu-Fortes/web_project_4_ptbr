@@ -5,7 +5,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._isLiked = false;
   }
-
+  // Get card temlate from DOM and returns the card element
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -14,7 +14,8 @@ export default class Card {
 
     return cardElement;
   }
-
+  /* Generates the card based on card element from getTemplate function,
+   * returns the complete card, with image and title*/
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListener();
