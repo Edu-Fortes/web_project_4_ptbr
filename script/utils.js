@@ -2,7 +2,7 @@
  * - One for profile modal - inputs to change profile info
  * - One for place modal - inputs to add new card/post
  * - One for photo modal - show bigger clicked card photo */
-const modals = document.querySelectorAll(".popup"); //returns a NodeList with 3 popup results
+const modals = Array.from(document.querySelectorAll(".popup")); //returns a NodeList with 3 popup results
 const profileModal = modals[0];
 const placeModal = modals[1];
 const photoModal = modals[2];
