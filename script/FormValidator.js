@@ -1,46 +1,35 @@
-/*O construtor deve usar um objeto de configuração que armazena seletores
-e classes de formulário.
-
-O construtor deve ter como base o elemento HTML do formulário para ser
-validado.
-//
-
-Possui métodos privados para processar o formulário. Em cada método,
-é necessário fazer menção ao campo de classe, e não passá-lo para cada
-método, como foi implementado anteriormente.
-
-Possui um método público enableValidation() . Chamar depois de criar uma
-instância de classe.*/
-
 export default class FormValidator {
   constructor(data, formSelector) {
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
-    this._formSelector = formSelector;
     this._disableClass = data.disableClass;
+    this._formSelector = formSelector;
   }
 
   _getFormElement() {
     const formElement = document.querySelector(this._formSelector);
     return formElement;
   }
-
+  /* Function to show error when the input field do not agree with
+   * validation parameters. Accepst as parameters the Form element,
+   * Input element and the Error Message */
   _showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   }
-
+  /* Function to hide error when the input field agree with
+   * validation parameters. */
   _hideInputError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
   }
-
+  /* Fucntion to check if the error messagem should be showed  or not*/
   _isValid(formElement, inputElement) {
     if (!inputElement.validityvalid) {
       this._showInputError(
@@ -52,13 +41,16 @@ export default class FormValidator {
       this._hideInputError(formElement, inputElement);
     }
   }
-
+  /* Function verify if all input fields are valid to activate the form
+   * submit button. Get an array as argument and returns "true" if at least
+   * one field is invalid, and returns "false" if all are valid*/
   _hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
-
+  /* Function to change button state (disabled to active). In conjuction with
+   * hasInvalidInput function, thi one will change button state*/
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(this._disableClass);
@@ -66,7 +58,7 @@ export default class FormValidator {
       buttonElement.classList.remove(this._disableClass);
     }
   }
-
+  /* Function receives form elements as parameters and add handles in each input field*/
   _setEventListener(formElement) {
     const inputList = Array.from(
       formElement.querySelectorAll(this._inputSelector)
@@ -82,7 +74,7 @@ export default class FormValidator {
       });
     });
   }
-
+  //method to enable validation of forms
   enableValidation = () => {
     const formList = Array.from(document.querySelectorAll(this._formSelector));
 
