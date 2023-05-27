@@ -1,6 +1,7 @@
 import Section from "./script/Section.js";
 import Card from "./script/Card.js";
 import Popup from "./script/Popup.js";
+import PopupWithImage from "./script/PopupWithImage.js";
 
 const initialCards = [
   {
@@ -49,8 +50,12 @@ modals.forEach((modal) => {
 });
 
 const profileModal = new Popup("#profile-modal");
+const addPicModal = new Popup(".popup");
+const photoModal = new PopupWithImage("#modal-photo");
 
 profileModal.setEventListeners();
+addPicModal.setEventListeners();
+photoModal.setEventListeners();
 
 document.addEventListener("click", (event) => {
   if (
@@ -58,6 +63,19 @@ document.addEventListener("click", (event) => {
     event.target.classList.contains("button_edit")
   ) {
     profileModal.open();
+    return;
+  }
+
+  if (
+    event.target.classList.contains("img_button_add") ||
+    event.target.classList.contains("button_add")
+  ) {
+    addPicModal.open();
+    return;
+  }
+
+  if (event.target.classList.contains("img_card")) {
+    photoModal.open(event);
     return;
   }
 });

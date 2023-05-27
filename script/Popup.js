@@ -2,32 +2,32 @@ export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
   }
-  // abre a janela popup
+  // opens popup when called
   open() {
     document.querySelector(this._popupSelector).classList.add("popup_opened");
+    this._handleEscClose();
   }
-  //fecha a janela popup
+  //close popup when called
   close() {
     document
       .querySelector(this._popupSelector)
       .classList.remove("popup_opened");
   }
-  //lógica para fechar o popup pressonando ESC
+  //logic to close popup on ESC press
   _handleEscClose() {
-    document.addEventListener("keydown", (event) => {
+    const _escPress = (event) => {
       if (event.key === "Escape") {
-        document
-          .querySelector(".popup_opened")
-          .classList.remove("popup_opened");
+        this.close();
+        document.removeEventListener("keydown", _escPress);
       }
-    });
-  }
-  /* adiciona um evento de click no ícone fechar popup.
-   * também deve fechar a janela clicando na área sombreada
-   * em torno do popup*/
-  setEventListeners() {
-    this._handleEscClose();
+    };
 
+    document.addEventListener("keydown", _escPress);
+  }
+  /* Adds a click event on close button icon.
+   * Alson closes popup when clicking on shadow area
+   * outside of popup edge*/
+  setEventListeners() {
     document.addEventListener("click", (event) => {
       if (
         event.target.classList.contains("img_button_close") ||
