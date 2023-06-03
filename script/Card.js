@@ -1,3 +1,5 @@
+import PopupWithImage from "./PopupWithImage.js";
+
 export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -65,9 +67,20 @@ export default class Card {
         this._like();
         return;
       }
+      if (event.target.classList.contains("img_card")) {
+        console.log("tste");
+        this.handleCardClick();
+      }
     });
     //add listener on trash button when hovering it to control card's opacity
     this._handleTrashBtnEvent("mouseenter");
     this._handleTrashBtnEvent("mouseleave");
+  }
+
+  handleCardClick() {
+    const photoModal = new PopupWithImage("#modal-photo");
+
+    photoModal.setEventListeners();
+    photoModal.open(event);
   }
 }

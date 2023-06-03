@@ -2,6 +2,8 @@ import Section from "./script/Section.js";
 import Card from "./script/Card.js";
 import Popup from "./script/Popup.js";
 import PopupWithImage from "./script/PopupWithImage.js";
+import PopupWithForm from "./script/PopupWithForm.js";
+import UserInfo from "./script/UserInfo.js";
 
 const initialCards = [
   {
@@ -49,20 +51,54 @@ modals.forEach((modal) => {
   modal.classList.remove("popup_opened");
 });
 
-const profileModal = new Popup("#profile-modal");
-const addPicModal = new Popup(".popup");
-const photoModal = new PopupWithImage("#modal-photo");
+// const profileModal = new Popup("#profile-modal");
+// const photoModal = new PopupWithImage("#modal-photo");
+const addPicModal = new PopupWithForm(
+  {
+    callback: (submit) => {
+      submit.preventDefault();
+      addPicModal.close();
+    },
+  },
+  "#add-card-modal"
+);
+const editProfile = new PopupWithForm(
+  {
+    callback: (submit) => {
+      submit.preventDefault();
 
-profileModal.setEventListeners();
+      // userInfo.getUserInfo();
+      userInfo.setUserInfo(
+        ".popup__input_type_name",
+        ".popup__input_type_about"
+      );
+      editProfile.close();
+    },
+  },
+  "#profile-modal"
+);
+
+// profileModal.setEventListeners();
+editProfile.setEventListeners();
 addPicModal.setEventListeners();
-photoModal.setEventListeners();
+// photoModal.setEventListeners();
 
 document.addEventListener("click", (event) => {
   if (
     event.target.classList.contains("img_button_edit") ||
     event.target.classList.contains("button_edit")
   ) {
-    profileModal.open();
+    editProfile.open();
+    const userData = userInfo.getUserInfo();
+    const inputName = document.querySelector(".popup__input_type_name");
+    const inputAbout = document.querySelector(".popup__input_type_about");
+
+    inputName.value = userData.name;
+    inputAbout.value = userData.work;
+
+    console.log(userData.name);
+    editProfile._getInputValues();
+
     return;
   }
 
@@ -71,11 +107,19 @@ document.addEventListener("click", (event) => {
     event.target.classList.contains("button_add")
   ) {
     addPicModal.open();
+    addPicModal._getInputValues();
     return;
   }
 
-  if (event.target.classList.contains("img_card")) {
-    photoModal.open(event);
-    return;
-  }
+  // if (event.target.classList.contains("img_card")) {
+  //   photoModal.open(event);
+  //   return;
+  // }
 });
+
+const selectors = {
+  nameSelector: ".profile__title",
+  workSelector: ".profile__subtitle",
+};
+
+const userInfo = new UserInfo(selectors);
