@@ -1,6 +1,5 @@
 import Section from "./script/Section.js";
 import Card from "./script/Card.js";
-import Popup from "./script/Popup.js";
 import PopupWithImage from "./script/PopupWithImage.js";
 import PopupWithForm from "./script/PopupWithForm.js";
 import UserInfo from "./script/UserInfo.js";
@@ -36,7 +35,7 @@ const cardsSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, "#card-template");
+      const card = new Card(item, "#card-template", handleCardClick);
       const cardElement = card.generateCard();
       cardsSection.addItem(cardElement);
     },
@@ -51,12 +50,27 @@ modals.forEach((modal) => {
   modal.classList.remove("popup_opened");
 });
 
-// const profileModal = new Popup("#profile-modal");
-// const photoModal = new PopupWithImage("#modal-photo");
 const addPicModal = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
+
+      const addedCardData = {};
+      const inputCardTitle = document.querySelector(".popup__input_type_place");
+      const inputCardImg = document.querySelector(".popup__input_type_img");
+
+      addedCardData.name = inputCardTitle.value;
+      addedCardData.link = inputCardImg.value;
+
+      const newCard = new Card(
+        addedCardData,
+        "#card-template",
+        handleCardClick
+      );
+      const newCardElement = newCard.generateCard();
+
+      document.querySelector(".place").prepend(newCardElement);
+
       addPicModal.close();
     },
   },
@@ -67,7 +81,6 @@ const editProfile = new PopupWithForm(
     callback: (submit) => {
       submit.preventDefault();
 
-      // userInfo.getUserInfo();
       userInfo.setUserInfo(
         ".popup__input_type_name",
         ".popup__input_type_about"
@@ -78,10 +91,8 @@ const editProfile = new PopupWithForm(
   "#profile-modal"
 );
 
-// profileModal.setEventListeners();
 editProfile.setEventListeners();
 addPicModal.setEventListeners();
-// photoModal.setEventListeners();
 
 document.addEventListener("click", (event) => {
   if (
@@ -110,11 +121,6 @@ document.addEventListener("click", (event) => {
     addPicModal._getInputValues();
     return;
   }
-
-  // if (event.target.classList.contains("img_card")) {
-  //   photoModal.open(event);
-  //   return;
-  // }
 });
 
 const selectors = {
@@ -123,3 +129,9 @@ const selectors = {
 };
 
 const userInfo = new UserInfo(selectors);
+
+function handleCardClick() {
+  const photoModal = new PopupWithImage("#modal-photo");
+  photoModal.setEventListeners();
+  photoModal.open(event);
+}

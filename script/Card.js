@@ -1,10 +1,11 @@
 import PopupWithImage from "./PopupWithImage.js";
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, cardClickFunction) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._cardClickFunction = cardClickFunction;
     this._isLiked = false;
   }
   // Get card temlate from DOM and returns the card element
@@ -68,19 +69,12 @@ export default class Card {
         return;
       }
       if (event.target.classList.contains("img_card")) {
-        console.log("tste");
-        this.handleCardClick();
+        console.log(event.target);
+        this._cardClickFunction();
       }
     });
     //add listener on trash button when hovering it to control card's opacity
     this._handleTrashBtnEvent("mouseenter");
     this._handleTrashBtnEvent("mouseleave");
-  }
-
-  handleCardClick() {
-    const photoModal = new PopupWithImage("#modal-photo");
-
-    photoModal.setEventListeners();
-    photoModal.open(event);
   }
 }
