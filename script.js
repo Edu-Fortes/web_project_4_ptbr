@@ -70,9 +70,7 @@ const addPicModal = new PopupWithForm(
         handleCardClick
       );
       const newCardElement = newCard.generateCard();
-
       document.querySelector(".place").prepend(newCardElement);
-
       addPicModal.close();
     },
   },
@@ -98,7 +96,6 @@ const selectors = {
   nameSelector: ".profile__title",
   workSelector: ".profile__subtitle",
 };
-
 const userInfo = new UserInfo(selectors);
 
 //adds event listeners to close popups
