@@ -68,8 +68,9 @@ export default class Card {
         this._like();
         return;
       }
+      //check if clicked element is card image
       if (event.target.classList.contains("img_card")) {
-        console.log(event.target);
+        //call function from index.js
         this._cardClickFunction();
       }
     });

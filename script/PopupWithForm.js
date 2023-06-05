@@ -5,7 +5,7 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._callback = callback;
   }
-  //coleta dados de todos os campos de entrada
+  //gets data from all input fields
   _getInputValues() {
     const inputData = {};
     const inputList = Array.from(
@@ -16,12 +16,11 @@ export default class PopupWithForm extends Popup {
 
     inputList.forEach((inputElement) => {
       inputData[`${inputElement.id}`] = inputElement.value;
-      console.log(inputData);
       return inputData;
     });
   }
-  //adiciona o manipulador de eventos ENVIAR ao fomulário e
-  //o ouvinte CLICK para o ícone de fechamento
+  /*adds SUBMIT event listener to the form
+   * and CLICK to close icon */
   setEventListeners() {
     const formElement = document
       .querySelector(this._popupSelector)
@@ -31,7 +30,7 @@ export default class PopupWithForm extends Popup {
     formElement.addEventListener("submit", this._callback);
   }
 
-  //modifica close() para redefinir formulário quando modal fechar
+  //modify close() to reset form on when closing popup
   close() {
     const formElement = document
       .querySelector(this._popupSelector)

@@ -4,7 +4,8 @@ export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
-
+  /* modify open() to get target image src and alt
+   * to populate popup with image*/
   open(event) {
     const modalImage = document
       .querySelector(this._popupSelector)
