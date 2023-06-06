@@ -10,7 +10,11 @@
     <div class="page__container">
       <header class="header">
         <figure class="header__fig">
-          <img src="images/svg/svg_logo.svg" alt="Logo da página EUA Afora" />
+          <img
+            src="<%=require('./images/svg/svg_logo.svg') %>"
+            alt="Logo da página EUA
+          Afora"
+          />
         </figure>
       </header>
 
@@ -22,7 +26,7 @@
             <figure class="profile__fig">
               <img
                 class="img"
-                src="./images/profile_photo.jpg"
+                src="<%=require('./images/profile_photo.jpg')%>"
                 alt="Foto do perfil do usuário"
               />
             </figure>
@@ -32,7 +36,7 @@
                 <button class="button button_edit" type="button">
                   <img
                     class="img img_button_edit"
-                    src="./images/svg/svg_pencil.svg"
+                    src="<%=require('./images/svg/svg_pencil.svg')%>"
                     alt="Ícone de um lápis para editar o perfil"
                   />
                 </button>
@@ -45,7 +49,7 @@
           <button class="button button_add" type="button">
             <img
               class="img img_button_add"
-              src="./images/svg/svg_plus.svg"
+              src="<%=require('./images/svg/svg_plus.svg')%>"
               alt="ícone do sinal de adição do botão de Adicionar"
             />
           </button>
@@ -67,7 +71,7 @@
           <button class="button button_close" type="button">
             <img
               class="img img_button_close"
-              src="./images/svg/svg_close.svg"
+              src="<%=require('./images/svg/svg_close.svg')%>"
               alt="Ícone em forma de um X para fechar a janela de edição de perfil"
             />
           </button>
@@ -113,7 +117,7 @@
           <button class="button button_close" type="button">
             <img
               class="img img_button_close"
-              src="./images/svg/svg_close.svg"
+              src="<%=require('./images/svg/svg_close.svg')%>"
               alt="Ícone em forma de um X para fechar a janela de edição de perfil"
             />
           </button>
@@ -159,7 +163,7 @@
           <button class="button button_trash" type="button">
             <img
               class="button__image"
-              src="./images/svg/svg_trash.svg"
+              src="<%=require('./images/svg/svg_trash.svg')%>"
               alt="Ícone de uma lixeira do botão de excluir postagem"
             />
           </button>
@@ -172,7 +176,7 @@
           <button class="button" type="button">
             <img
               class="button__like button__like_active"
-              src="./images/svg/svg_like.svg"
+              src="<%=require('./images/svg/svg_like.svg')%>"
               alt="Ícone de coração do botão curtir"
             />
           </button>
@@ -187,7 +191,7 @@
         <button class="button button_close button_close_photo" type="button">
           <img
             class="img img_button_close"
-            src="./images/svg/svg_close.svg"
+            src="<%=require('./images/svg/svg_close.svg')%>"
             alt="Ícone em forma de um X para fechar a janela de edição de perfil"
           />
         </button>
