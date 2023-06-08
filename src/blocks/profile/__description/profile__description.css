@@ -1,6 +1,7 @@
 .profile__description {
   margin: 0;
   padding: 0;
+  max-width: 25.9375rem;
   list-style: none;
   display: flex;
   flex-direction: column;
