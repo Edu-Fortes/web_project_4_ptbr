@@ -5,26 +5,52 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { initialCards, selectors, formsConfig } from "../utils/constants.js";
+import { selectors, formsConfig } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
-const cardsSection = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, "#card-template", handleCardClick);
-      const cardElement = card.generateCard();
-      cardsSection.addItem(cardElement);
-    },
-  },
-  ".place"
-);
-//render card section
-cardsSection.renderItems();
 //closes all popups on page loading
 const modals = document.querySelectorAll(".popup");
 modals.forEach((modal) => {
   modal.classList.remove("popup_opened");
 });
+
+//constant to store user token
+const api = new Api(
+  "https://around.nomoreparties.co/v1/web_ptbr_04",
+  "f76476c9-9b53-4968-99fe-a8b4cbde5202"
+);
+
+//Api promisse to load initial cards and render on page
+api
+  .get()
+  .then((res) => {
+    if (res.ok) {
+      //return an Array of Cards object
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  })
+  .then((cardsArr) => {
+    //assembly cards to create card section
+    const cardsSection = new Section(
+      {
+        items: cardsArr,
+        renderer: (item) => {
+          const card = new Card(item, "#card-template", handleCardClick);
+          const cardElement = card.generateCard();
+          cardsSection.addItem(cardElement);
+        },
+      },
+      ".place"
+    );
+    //render card section using Array from initialCards
+    cardsSection.renderItems();
+    console.log(object);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 /*class PopupWithForm sends a callback function, to handle form
  * SUBMIT, to the constructor and selector*/
 const addPicModal = new PopupWithForm(

@@ -5,6 +5,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._cardClickFunction = cardClickFunction;
     this._isLiked = false;
+    this._cardId = data._id;
   }
   // Get card temlate from DOM and returns the card element
   _getTemplate() {
