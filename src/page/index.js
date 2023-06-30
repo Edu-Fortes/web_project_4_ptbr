@@ -20,9 +20,24 @@ const api = new Api(
   "f76476c9-9b53-4968-99fe-a8b4cbde5202"
 );
 
+const user = "users/me";
+const cards = "cards";
+
+api
+  .get(user)
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  })
+  .then((userInfo) => {
+    console.log(userInfo);
+  });
+
 //Api promisse to load initial cards and render on page
 api
-  .get()
+  .get(cards)
   .then((res) => {
     if (res.ok) {
       //return an Array of Cards object
@@ -45,7 +60,7 @@ api
     );
     //render card section using Array from initialCards
     cardsSection.renderItems();
-    console.log(object);
+    console.log(cardsArr);
   })
   .catch((err) => {
     console.log(err);

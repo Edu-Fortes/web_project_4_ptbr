@@ -4,8 +4,8 @@ export default class Api {
     this._authorization = authorization;
   }
 
-  get() {
-    return fetch(`${this._baseUrl}/cards`, {
+  get(what) {
+    return fetch(`${this._baseUrl}/${what}`, {
       headers: {
         authorization: this._authorization,
       },
