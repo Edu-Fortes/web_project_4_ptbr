@@ -23,6 +23,7 @@ const api = new Api(
 const user = "users/me";
 const cards = "cards";
 
+//Retrieve User Info from server and show on page
 api
   .get(user)
   .then((res) => {
@@ -31,11 +32,22 @@ api
     }
     return Promise.reject(`Error: ${res.status}`);
   })
+  //an object containing user data
   .then((userInfo) => {
     console.log(userInfo);
+    const avatarImg = document.querySelector(".img_avatar");
+    const nameTitle = document.querySelector(".profile__title");
+    const aboutTitle = document.querySelector(".profile__subtitle");
+
+    // avatarImg.src = userInfo.avatar;
+    nameTitle.textContent = userInfo.name;
+    aboutTitle.textContent = userInfo.about;
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
-//Api promisse to load initial cards and render on page
+//Retrieve initial cards Array from server and render on page
 api
   .get(cards)
   .then((res) => {
