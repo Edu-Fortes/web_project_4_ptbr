@@ -1,25 +1,25 @@
 export default class LoadAnimation {
-  constructor(selector, cssClass) {
+  constructor(selector) {
     this._selector = selector;
-    this._cssClass = cssClass;
+    this._avatar = document.querySelector(".img_avatar");
+    this._title = document.querySelector(".profile__title");
+    this._subtitle = document.querySelector(".profile__subtitle");
   }
 
-  profileSection(isLoading) {
-    const avatar = document.querySelector(".img_avatar");
-    const title = document.querySelector(".profile__title");
-    const subtitle = document.querySelector(".profile__subtitle");
-    if (isLoading) {
-      avatar.alt = ".";
-      avatar.classList.add("skeleton", "skeleton_avatar");
-      title.classList.add("skeleton", "skeleton_title");
-      subtitle.classList.add("skeleton", "skeleton_subtitle");
-    } else {
-      avatar.alt = "Foto do perfil do usuário";
-      avatar.classList.remove("skeleton", "skeleton_avatar");
-      title.classList.remove("skeleton", "skeleton_title");
-      subtitle.classList.remove("skeleton", "skeleton_subtitle");
-    }
-  }
+  // profileSection(isLoading) {
+  //   if (isLoading) {
+  //     console.log(this._avatar);
+  //     this._avatar.alt = ".";
+  //     this._avatar.classList.add(this._selector.skeletonAvatar);
+  //     this._title.classList.add("skeleton", "skeleton_title");
+  //     this._subtitle.classList.add("skeleton", "skeleton_subtitle");
+  //   } else {
+  //     avatar.alt = "Foto do perfil do usuário";
+  //     avatar.classList.remove("skeleton", "skeleton_avatar");
+  //     title.classList.remove("skeleton", "skeleton_title");
+  //     subtitle.classList.remove("skeleton", "skeleton_subtitle");
+  //   }
+  // }
 
   cardsSection(isLoading) {
     const container = document.querySelector(".place");

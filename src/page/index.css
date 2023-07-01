@@ -12,6 +12,7 @@
 
 @import url("../blocks/main/main.css");
 @import url("../blocks/profile/profile.css");
+@import url("../blocks/skeleton/skeleton.css");
 @import url("../blocks/list-container/list-container.css");
 @import url("../blocks/places/places.css");
 @import url("../blocks/place/place.css");
@@ -21,6 +22,7 @@
 @import url("../blocks/footer/footer.css");
 
 @import url("../blocks/popup/popup.css");
+
 /* ELEMENTS */
 
 @import url("../blocks/page/__container/page__container.css");
@@ -54,6 +56,12 @@
 @import url("../blocks/popup/__photo-container/popup__photo-container.css");
 
 /* MODIFIERS */
+
+@import url("../blocks/skeleton/_title/skeleton_title.css");
+@import url("../blocks/skeleton/_subtitle/skeleton_subtitle.css");
+@import url("../blocks/skeleton/_avatar/skeleton_avatar.css");
+
+@import url("../blocks/place/__loading/place__loading.css");
 
 @import url("../blocks/img/_card/img_card.css");
 

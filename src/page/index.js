@@ -7,6 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import { selectors, formsConfig, urlPaths } from "../utils/constants.js";
 import Api from "../components/Api.js";
+import LoadAnimation from "../components/LoadAnimation.js";
 
 //closes all popups on page loading
 const modals = document.querySelectorAll(".popup");
@@ -19,10 +20,9 @@ const api = new Api(
   "https://around.nomoreparties.co/v1/web_ptbr_04",
   "f76476c9-9b53-4968-99fe-a8b4cbde5202"
 );
-
-// const user = "users/me";
-// const cards = "cards";
-
+const loading = new LoadAnimation(selectors);
+// loading.profileSection(true);
+loading.cardsSection(true);
 //Retrieve User Info from server and show on page
 api
   .get(urlPaths.user)
