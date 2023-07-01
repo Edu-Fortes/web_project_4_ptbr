@@ -12,4 +12,9 @@ const formsConfig = {
   disableClass: "button_disabled",
 };
 
-export { selectors, formsConfig };
+const urlPaths = {
+  user: "users/me",
+  cards: "cards",
+};
+
+export { selectors, formsConfig, urlPaths };

@@ -5,7 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { selectors, formsConfig } from "../utils/constants.js";
+import { selectors, formsConfig, urlPaths } from "../utils/constants.js";
 import Api from "../components/Api.js";
 
 //closes all popups on page loading
@@ -20,12 +20,12 @@ const api = new Api(
   "f76476c9-9b53-4968-99fe-a8b4cbde5202"
 );
 
-const user = "users/me";
-const cards = "cards";
+// const user = "users/me";
+// const cards = "cards";
 
 //Retrieve User Info from server and show on page
 api
-  .get(user)
+  .get(urlPaths.user)
   .then((res) => {
     if (res.ok) {
       return res.json();
@@ -49,7 +49,7 @@ api
 
 //Retrieve initial cards Array from server and render on page
 api
-  .get(cards)
+  .get(urlPaths.cards)
   .then((res) => {
     if (res.ok) {
       //return an Array of Cards object
