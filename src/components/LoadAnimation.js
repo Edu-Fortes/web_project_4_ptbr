@@ -1,22 +1,40 @@
 export default class LoadAnimation {
   constructor(selector) {
     this._selector = selector;
+    this._avatar = document.querySelector(this._selector.imgAvatar);
+    this._title = document.querySelector(this._selector.nameSelector);
+    this._subtitle = document.querySelector(this._selector.workSelector);
   }
 
   profileSection(isLoading) {
     if (isLoading) {
-      const avatar = document.querySelector(".img_avatar");
-      const title = document.querySelector(".profile__title");
-      const subtitle = document.querySelector(".profile__subtitle");
-      avatar.alt = ".";
-      avatar.classList.add(this._selector.skeletonAvatar);
-      title.classList.add("skeleton", "skeleton_title");
-      subtitle.classList.add("skeleton", "skeleton_subtitle");
+      this._avatar.alt = ".";
+      this._avatar.classList.add(
+        this._selector.skeleton,
+        this._selector.skeletonAvatar
+      );
+      this._title.classList.add(
+        this._selector.skeleton,
+        this._selector.skeletonTitle
+      );
+      this._subtitle.classList.add(
+        this._selector.skeleton,
+        this._selector.skeletonSubtitle
+      );
     } else {
-      avatar.alt = "Foto do perfil do usuário";
-      avatar.classList.remove("skeleton", "skeleton_avatar");
-      title.classList.remove("skeleton", "skeleton_title");
-      subtitle.classList.remove("skeleton", "skeleton_subtitle");
+      this._avatar.alt = "Foto do perfil do usuário";
+      this._avatar.classList.remove(
+        this._selector.skeleton,
+        this._selector.skeletonAvatar
+      );
+      this._title.classList.remove(
+        this._selector.skeleton,
+        this._selector.skeletonTitle
+      );
+      this._subtitle.classList.remove(
+        this._selector.skeleton,
+        this._selector.skeletonSubtitle
+      );
     }
   }
 

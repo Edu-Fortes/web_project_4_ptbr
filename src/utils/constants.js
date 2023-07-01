@@ -2,7 +2,11 @@
 const selectors = {
   nameSelector: ".profile__title",
   workSelector: ".profile__subtitle",
-  skeletonAvatar: `"skeleton", "skeleton_avatar"`,
+  imgAvatar: ".img_avatar",
+  skeleton: "skeleton",
+  skeletonAvatar: "skeleton_avatar",
+  skeletonTitle: "skeleton_title",
+  skeletonSubtitle: "skeleton_subtitle",
 };
 //Forms Configuration Object contening CSS clases and selectors
 const formsConfig = {

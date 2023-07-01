@@ -45,6 +45,9 @@ api
   })
   .catch((err) => {
     console.log(err);
+  })
+  .finally(() => {
+    loading.profileSection(false);
   });
 
 //Retrieve initial cards Array from server and render on page

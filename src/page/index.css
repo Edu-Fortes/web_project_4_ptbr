@@ -63,6 +63,8 @@
 
 @import url("../blocks/place/__loading/place__loading.css");
 
+@import url("../blocks/img/_avatar/img_avatar.css");
+
 @import url("../blocks/img/_card/img_card.css");
 
 @import url("../blocks/button/_edit/button_edit.css");
