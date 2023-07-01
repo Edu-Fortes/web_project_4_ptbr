@@ -15,14 +15,16 @@ modals.forEach((modal) => {
   modal.classList.remove("popup_opened");
 });
 
-//constant to store user token
-const api = new Api(
-  "https://around.nomoreparties.co/v1/web_ptbr_04",
-  "f76476c9-9b53-4968-99fe-a8b4cbde5202"
-);
+//invoke Api client
+const api = new Api(urlPaths);
+
+//invokes class to add Loading Animations
 const loading = new LoadAnimation(selectors);
+
+//start loading animation on page load
 loading.profileSection(true);
 loading.cardsSection(true);
+
 //Retrieve User Info from server and show on page
 api
   .get(urlPaths.user)
@@ -32,7 +34,7 @@ api
     }
     return Promise.reject(`Error: ${res.status}`);
   })
-  //an object containing user data
+  //object containing user data
   .then((userInfo) => {
     console.log(userInfo);
     const avatarImg = document.querySelector(".img_avatar");
