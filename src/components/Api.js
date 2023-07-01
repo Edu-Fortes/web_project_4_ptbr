@@ -11,4 +11,18 @@ export default class Api {
       },
     });
   }
+
+  patch(where, dataToPatch) {
+    return fetch(`${this._baseUrl}/${where}`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "apllication/json",
+      },
+      body: JSON.stringify({
+        name: dataToPatch.name,
+        about: dataToPatch.about,
+      }),
+    });
+  }
 }
