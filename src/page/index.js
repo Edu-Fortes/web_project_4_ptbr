@@ -21,7 +21,7 @@ const api = new Api(
   "f76476c9-9b53-4968-99fe-a8b4cbde5202"
 );
 const loading = new LoadAnimation(selectors);
-// loading.profileSection(true);
+loading.profileSection(true);
 loading.cardsSection(true);
 //Retrieve User Info from server and show on page
 api
@@ -58,6 +58,9 @@ api
     return Promise.reject(`Error: ${res.status}`);
   })
   .then((cardsArr) => {
+    //clear card loading animation to show rendered cards
+    const placeCotainer = document.querySelector(".place");
+    placeCotainer.innerHTML = "";
     //assembly cards to create card section
     const cardsSection = new Section(
       {
@@ -76,6 +79,9 @@ api
   })
   .catch((err) => {
     console.log(err);
+  })
+  .finally(() => {
+    loading.cardsSection(false);
   });
 
 /*class PopupWithForm sends a callback function, to handle form
