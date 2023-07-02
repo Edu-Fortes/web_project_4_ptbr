@@ -91,6 +91,20 @@ api
 
 /*class PopupWithForm sends a callback function, to handle form
  * SUBMIT, to the constructor and selector*/
+
+//callback funtion to handle form SUBMIT
+const editProfile = new PopupWithForm(
+  {
+    callback: (submit) => {
+      submit.preventDefault();
+
+      userInfo.setUserInfo(selectors);
+      editProfile.close();
+    },
+  },
+  "#profile-modal"
+);
+const userInfo = new UserInfo(selectors);
 const addPicModal = new PopupWithForm(
   {
     callback: (submit) => {
@@ -115,22 +129,6 @@ const addPicModal = new PopupWithForm(
   },
   "#add-card-modal"
 );
-//callback funtion to handle form SUBMIT
-const editProfile = new PopupWithForm(
-  {
-    callback: (submit) => {
-      submit.preventDefault();
-
-      userInfo.setUserInfo(
-        ".popup__input_type_name",
-        ".popup__input_type_about"
-      );
-      editProfile.close();
-    },
-  },
-  "#profile-modal"
-);
-const userInfo = new UserInfo(selectors);
 
 //adds event listeners to close popups
 editProfile.setEventListeners();
@@ -143,8 +141,8 @@ document.addEventListener("click", (event) => {
   ) {
     editProfile.open();
     const userData = userInfo.getUserInfo();
-    const inputName = document.querySelector(".popup__input_type_name");
-    const inputAbout = document.querySelector(".popup__input_type_about");
+    const inputName = document.querySelector(selectors.nameInputClass);
+    const inputAbout = document.querySelector(selectors.workInputClass);
 
     inputName.value = userData.name;
     inputAbout.value = userData.work;

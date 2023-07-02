@@ -11,7 +11,7 @@ export default class UserInfo {
     return userData;
   }
   //get new user data and insert on page
-  setUserInfo(nameInputClass, workInputClass) {
+  setUserInfo({ nameInputClass, workInputClass }) {
     this.userInfo = this.getUserInfo();
 
     this.userInfo.name = document.querySelector(nameInputClass).value;

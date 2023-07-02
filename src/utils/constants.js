@@ -3,6 +3,8 @@ const selectors = {
   nameSelector: ".profile__title",
   workSelector: ".profile__subtitle",
   imgAvatar: ".img_avatar",
+  nameInputClass: ".popup__input_type_name",
+  workInputClass: ".popup__input_type_about",
   skeleton: "skeleton",
   skeletonAvatar: "skeleton_avatar",
   skeletonTitle: "skeleton_title",
