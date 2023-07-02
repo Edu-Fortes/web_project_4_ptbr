@@ -41,7 +41,7 @@ api
     const nameTitle = document.querySelector(".profile__title");
     const aboutTitle = document.querySelector(".profile__subtitle");
 
-    // avatarImg.src = userInfo.avatar;
+    avatarImg.src = userInfo.avatar;
     nameTitle.textContent = userInfo.name;
     aboutTitle.textContent = userInfo.about;
   })
