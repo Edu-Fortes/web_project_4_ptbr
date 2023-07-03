@@ -3,7 +3,7 @@ export default class LoadAnimation {
     this._selector = selector;
     this._avatar = document.querySelector(this._selector.imgAvatar);
     this._title = document.querySelector(this._selector.nameSelector);
-    this._subtitle = document.querySelector(this._selector.workSelector);
+    this._subtitle = document.querySelector(this._selector.aboutSelector);
     this._editBtn = document.querySelector(this._selector.editBtn);
     this._addBtn = document.querySelector(this._selector.addBtn);
     this._pencilIcon = document.querySelector(this._selector.pencilIcon);

@@ -1,10 +1,10 @@
 //class selector to be used with UserInfo class
 const selectors = {
   nameSelector: ".profile__title",
-  workSelector: ".profile__subtitle",
+  aboutSelector: ".profile__subtitle",
   imgAvatar: ".img_avatar",
   nameInputClass: ".popup__input_type_name",
-  workInputClass: ".popup__input_type_about",
+  aboutInputClass: ".popup__input_type_about",
   editBtn: ".button_edit",
   addBtn: ".button_add",
   pencilIcon: ".img_button_edit",

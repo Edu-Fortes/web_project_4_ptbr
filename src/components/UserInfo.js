@@ -1,13 +1,13 @@
 export default class UserInfo {
-  constructor({ nameSelector, workSelector }) {
+  constructor({ nameSelector, aboutSelector }) {
     this.nameSelector = document.querySelector(nameSelector);
-    this.workSelector = document.querySelector(workSelector);
+    this.aboutSelector = document.querySelector(aboutSelector);
   }
   //returns an object with user data
   getUserInfo() {
     const userData = {};
     userData.name = this.nameSelector.textContent;
-    userData.work = this.workSelector.textContent;
+    userData.about = this.aboutSelector.textContent;
     return userData;
   }
   //get new user data and insert on page
@@ -18,6 +18,6 @@ export default class UserInfo {
     this.userInfo.work = document.querySelector(workInputClass).value;
 
     this.nameSelector.textContent = this.userInfo.name;
-    this.workSelector.textContent = this.userInfo.work;
+    this.aboutSelector.textContent = this.userInfo.work;
   }
 }

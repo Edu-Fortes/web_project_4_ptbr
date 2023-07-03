@@ -140,12 +140,12 @@ document.addEventListener("click", (event) => {
     event.target.classList.contains("button_edit")
   ) {
     editProfile.open();
-    const userData = userInfo.getUserInfo();
+    const userData = user.getUserInfo();
     const inputName = document.querySelector(selectors.nameInputClass);
-    const inputAbout = document.querySelector(selectors.workInputClass);
+    const inputAbout = document.querySelector(selectors.aboutInputClass);
 
     inputName.value = userData.name;
-    inputAbout.value = userData.work;
+    inputAbout.value = userData.about;
     return;
   }
   if (
