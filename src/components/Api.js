@@ -12,16 +12,16 @@ export default class Api {
     });
   }
 
-  patch(where, dataToPatch) {
+  patch(where, { name, about }) {
     return fetch(`${this._baseUrl}/${where}`, {
       method: "PATCH",
       headers: {
         authorization: this._authorization,
-        "Content-Type": "apllication/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: dataToPatch.name,
-        about: dataToPatch.about,
+        name: name,
+        about: about,
       }),
     });
   }

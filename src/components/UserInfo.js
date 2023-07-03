@@ -11,13 +11,14 @@ export default class UserInfo {
     return userData;
   }
   //get new user data and insert on page
-  setUserInfo({ nameInputClass, workInputClass }) {
-    this.userInfo = this.getUserInfo();
+  setUserInfo({ nameInputClass, aboutInputClass }) {
+    const newUser = {};
 
-    this.userInfo.name = document.querySelector(nameInputClass).value;
-    this.userInfo.work = document.querySelector(workInputClass).value;
+    newUser.name = document.querySelector(nameInputClass).value;
+    newUser.about = document.querySelector(aboutInputClass).value;
 
-    this.nameSelector.textContent = this.userInfo.name;
-    this.aboutSelector.textContent = this.userInfo.work;
+    this.nameSelector.textContent = newUser.name;
+    this.aboutSelector.textContent = newUser.about;
+    return newUser;
   }
 }

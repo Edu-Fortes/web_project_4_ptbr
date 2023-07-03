@@ -21,6 +21,8 @@ const api = new Api(urlPaths);
 //invokes class to add Loading Animations
 const loading = new LoadAnimation(selectors);
 
+//invoke class to get/set user info
+const user = new UserInfo(selectors);
 //start loading animation on page load
 loading.profileSection(true);
 loading.cardsSection(true);
@@ -36,7 +38,6 @@ api
   })
   //object containing user data
   .then((userInfo) => {
-    console.log(userInfo);
     const avatarImg = document.querySelector(".img_avatar");
     const nameTitle = document.querySelector(".profile__title");
     const aboutTitle = document.querySelector(".profile__subtitle");
@@ -80,7 +81,6 @@ api
     );
     //render card section using Array from initialCards
     cardsSection.renderItems();
-    console.log(cardsArr);
   })
   .catch((err) => {
     console.log(err);
@@ -89,22 +89,31 @@ api
     loading.cardsSection(false);
   });
 
-/*class PopupWithForm sends a callback function, to handle form
- * SUBMIT, to the constructor and selector*/
-
-//callback funtion to handle form SUBMIT
+//handle what happens when clicking "Save" button in Edit Profile Modal
 const editProfile = new PopupWithForm(
   {
+    //callback funtion to handle form SUBMIT
     callback: (submit) => {
       submit.preventDefault();
+      const dataToPatch = user.setUserInfo(selectors);
 
-      userInfo.setUserInfo(selectors);
+      api
+        .patch(urlPaths.user, dataToPatch)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       editProfile.close();
     },
   },
   "#profile-modal"
 );
-const userInfo = new UserInfo(selectors);
+
+//handle what happens when clicking "Save" button in Add New Picture Modal
 const addPicModal = new PopupWithForm(
   {
     callback: (submit) => {
