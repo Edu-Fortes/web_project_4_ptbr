@@ -6,9 +6,12 @@ export default class LoadAnimation {
     this._subtitle = document.querySelector(this._selector.workSelector);
     this._editBtn = document.querySelector(this._selector.editBtn);
     this._addBtn = document.querySelector(this._selector.addBtn);
+    this._pencilIcon = document.querySelector(this._selector.pencilIcon);
+    this._plusIcon = document.querySelector(this._selector.plusIcon);
   }
 
   profileSection(isLoading) {
+    //check if isLoading is true. If is true add animation classes
     if (isLoading) {
       this._avatar.alt = ".";
       this._avatar.classList.add(
@@ -31,7 +34,11 @@ export default class LoadAnimation {
         this._selector.skeleton,
         this._selector.btnHidde
       );
-    } else {
+      this._pencilIcon.classList.add(this._selector.imgHide);
+      this._plusIcon.classList.add(this._selector.imgHide);
+    }
+    //if false removes all added css classes
+    else {
       this._avatar.alt = "Foto do perfil do usuário";
       this._avatar.classList.remove(
         this._selector.skeleton,
@@ -53,6 +60,8 @@ export default class LoadAnimation {
         this._selector.skeleton,
         this._selector.btnHidde
       );
+      this._pencilIcon.classList.remove(this._selector.imgHide);
+      this._plusIcon.classList.remove(this._selector.imgHide);
     }
   }
 
