@@ -26,7 +26,7 @@ export default class Api {
     });
   }
 
-  post(where) {
+  post(where, { name, link }) {
     return fetch(`${this._baseUrl}/${where}`, {
       method: "POST",
       headers: {
@@ -34,8 +34,8 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "",
-        link: "",
+        name: name,
+        link: link,
       }),
     });
   }

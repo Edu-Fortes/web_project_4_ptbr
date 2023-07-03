@@ -126,14 +126,24 @@ const addPicModal = new PopupWithForm(
       addedCardData.name = inputCardTitle.value;
       addedCardData.link = inputCardImg.value;
 
-      const newCard = new Card(
-        addedCardData,
-        "#card-template",
-        handleCardClick
-      );
-      const newCardElement = newCard.generateCard();
-      document.querySelector(".place").prepend(newCardElement);
-      addPicModal.close();
+      console.log(addedCardData);
+
+      api
+        .post(urlPaths.cards, addedCardData)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((card) => {
+          const newCard = new Card(card, "#card-template", handleCardClick);
+          const newCardElement = newCard.generateCard();
+          document.querySelector(".place").prepend(newCardElement);
+          addPicModal.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   "#add-card-modal"
