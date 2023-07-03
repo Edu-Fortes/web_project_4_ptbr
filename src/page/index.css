@@ -57,6 +57,8 @@
 
 /* MODIFIERS */
 
+@import url("../blocks/button/_hidde/button_hidde.css");
+
 @import url("../blocks/skeleton/_title/skeleton_title.css");
 @import url("../blocks/skeleton/_subtitle/skeleton_subtitle.css");
 @import url("../blocks/skeleton/_avatar/skeleton_avatar.css");
