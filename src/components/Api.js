@@ -25,4 +25,18 @@ export default class Api {
       }),
     });
   }
+
+  post(where) {
+    return fetch(`${this._baseUrl}/${where}`, {
+      method: "POST",
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "",
+        link: "",
+      }),
+    });
+  }
 }
