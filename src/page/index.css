@@ -42,6 +42,7 @@
 @import url("../blocks/place/__name/place__name.css");
 
 @import url("../blocks/button/__like/button__like.css");
+@import url("../blocks/button/__count/button__count.css");
 
 @import url("../blocks/footer/__content/footer__content.css");
 
