@@ -65,8 +65,7 @@ api
   })
   .then((cardsArr) => {
     //clear card loading animation to show rendered cards
-    const placeCotainer = document.querySelector(".place");
-    placeCotainer.innerHTML = "";
+    document.querySelector(".place").innerHTML = "";
     //assembly cards to create card section
     const cardsSection = new Section(
       {
