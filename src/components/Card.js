@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._cardClickFunction = cardClickFunction;
+    this._likeCount = data.likes;
     this._isLiked = false;
     this._cardId = data._id;
   }
@@ -30,8 +31,18 @@ export default class Card {
     this._element
       .querySelector(".button__like")
       .classList.remove("button__like_active");
+    this._showLike();
 
     return this._element;
+  }
+
+  _showLike() {
+    const likeCounter = this._element.querySelector(".button__count");
+    if (this._likeCount == []) {
+      likeCounter.textContent = 0;
+    } else {
+      likeCounter.textContent = this._likeCount.length;
+    }
   }
 
   _like() {
