@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, cardClickFunction) {
+  constructor(data, userData, cardSelector, cardClickFunction) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
@@ -7,6 +7,8 @@ export default class Card {
     this._likeCount = data.likes;
     this._isLiked = false;
     this._cardId = data._id;
+    this._owner = data.owner;
+    this._userData = userData;
   }
   // Get card temlate from DOM and returns the card element
   _getTemplate() {
@@ -14,7 +16,6 @@ export default class Card {
       .querySelector(this._cardSelector)
       .content.querySelector(".place__card")
       .cloneNode(true);
-
     return cardElement;
   }
   /* Generates the card based on card element from getTemplate function,
@@ -32,6 +33,7 @@ export default class Card {
       .querySelector(".button__like")
       .classList.remove("button__like_active");
     this._showLike();
+    this._showTrashBtn();
 
     return this._element;
   }
@@ -42,6 +44,12 @@ export default class Card {
       likeCounter.textContent = 0;
     } else {
       likeCounter.textContent = this._likeCount.length;
+    }
+  }
+
+  async _showTrashBtn() {
+    if (this._owner._id != this._userData._id) {
+      this._element.querySelector(".button_trash").remove();
     }
   }
 

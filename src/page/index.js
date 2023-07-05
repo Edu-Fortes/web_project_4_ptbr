@@ -28,7 +28,7 @@ loading.profileSection(true);
 loading.cardsSection(true);
 
 //Retrieve User Info from server and show on page
-api
+const userData = await api
   .get(urlPaths.user)
   .then((res) => {
     if (res.ok) {
@@ -45,6 +45,7 @@ api
     avatarImg.src = userInfo.avatar;
     nameTitle.textContent = userInfo.name;
     aboutTitle.textContent = userInfo.about;
+    return userInfo;
   })
   .catch((err) => {
     console.log(err);
@@ -52,7 +53,6 @@ api
   .finally(() => {
     loading.profileSection(false);
   });
-
 //Retrieve initial cards Array from server and render on page
 api
   .get(urlPaths.cards)
@@ -71,7 +71,12 @@ api
       {
         items: cardsArr,
         renderer: (item) => {
-          const card = new Card(item, "#card-template", handleCardClick);
+          const card = new Card(
+            item,
+            userData,
+            "#card-template",
+            handleCardClick
+          );
           const cardElement = card.generateCard();
           cardsSection.addItem(cardElement);
         },
