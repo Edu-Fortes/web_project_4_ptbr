@@ -34,8 +34,13 @@ export default class Card {
       .classList.remove("button__like_active");
     this._showLike();
     this._showTrashBtn();
+    this._setId();
 
     return this._element;
+  }
+
+  _setId() {
+    this._element.setAttribute("id", `${this._cardId}`);
   }
 
   _showLike() {

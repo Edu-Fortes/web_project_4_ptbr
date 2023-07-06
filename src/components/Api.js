@@ -39,4 +39,14 @@ export default class Api {
       }),
     });
   }
+
+  delete(where, what) {
+    return fetch(`${this._baseUrl}/${where}/${what}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "application/json",
+      },
+    });
+  }
 }

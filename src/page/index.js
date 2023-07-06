@@ -54,7 +54,7 @@ const userData = await api
     loading.profileSection(false);
   });
 //Retrieve initial cards Array from server and render on page
-api
+const initialCards = api
   .get(urlPaths.cards)
   .then((res) => {
     if (res.ok) {
@@ -85,6 +85,19 @@ api
     );
     //render card section using Array from initialCards
     cardsSection.renderItems();
+    return cardsArr;
+  })
+  .then((ownedCards) => {
+    //creates an array with owned cards
+    ownedCards.filter((card) => {
+      const cardOwner = card.owner;
+      if (cardOwner._id == userData._id) {
+        console.log(cardOwner._id);
+        console.log(userData._id);
+        console.log(card);
+        return card;
+      }
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -92,7 +105,6 @@ api
   .finally(() => {
     loading.cardsSection(false);
   });
-
 //handle what happens when clicking "Save" button in Edit Profile Modal
 const editProfile = new PopupWithForm(
   {
@@ -136,11 +148,18 @@ const addPicModal = new PopupWithForm(
         .post(urlPaths.cards, addedCardData)
         .then((res) => {
           if (res.ok) {
+            console.log(res);
             return res.json();
           }
         })
         .then((card) => {
-          const newCard = new Card(card, "#card-template", handleCardClick);
+          console.log(card);
+          const newCard = new Card(
+            card,
+            userData,
+            "#card-template",
+            handleCardClick
+          );
           const newCardElement = newCard.generateCard();
           document.querySelector(".place").prepend(newCardElement);
           addPicModal.close();
@@ -203,3 +222,10 @@ formList.forEach((formElement) => {
   const validate = new FormValidator(formsConfig, ".popup__form");
   validate.enableValidation(formElement);
 });
+
+function deleteCard(object, test) {
+  api.delete(object.cards, test);
+}
+
+const teste = "64a69d740880f709efbe4147";
+// deleteCard(urlPaths, teste);
