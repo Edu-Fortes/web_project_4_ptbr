@@ -53,8 +53,9 @@ const userData = await api
   .finally(() => {
     loading.profileSection(false);
   });
+
 //Retrieve initial cards Array from server and render on page
-const initialCards = api
+api
   .get(urlPaths.cards)
   .then((res) => {
     if (res.ok) {
@@ -87,24 +88,13 @@ const initialCards = api
     cardsSection.renderItems();
     return cardsArr;
   })
-  .then((ownedCards) => {
-    //creates an array with owned cards
-    ownedCards.filter((card) => {
-      const cardOwner = card.owner;
-      if (cardOwner._id == userData._id) {
-        console.log(cardOwner._id);
-        console.log(userData._id);
-        console.log(card);
-        return card;
-      }
-    });
-  })
   .catch((err) => {
     console.log(err);
   })
   .finally(() => {
     loading.cardsSection(false);
   });
+
 //handle what happens when clicking "Save" button in Edit Profile Modal
 const editProfile = new PopupWithForm(
   {
@@ -142,18 +132,14 @@ const addPicModal = new PopupWithForm(
       addedCardData.name = inputCardTitle.value;
       addedCardData.link = inputCardImg.value;
 
-      console.log(addedCardData);
-
       api
         .post(urlPaths.cards, addedCardData)
         .then((res) => {
           if (res.ok) {
-            console.log(res);
             return res.json();
           }
         })
         .then((card) => {
-          console.log(card);
           const newCard = new Card(
             card,
             userData,
@@ -172,11 +158,28 @@ const addPicModal = new PopupWithForm(
   "#add-card-modal"
 );
 
+const deleteAlert = new PopupWithForm(
+  {
+    callback: (submit) => {
+      submit.preventDefault();
+      console.log(ownedCards);
+      console.log(clickedCard);
+      console.log(submit);
+    },
+  },
+  "#modal-delete"
+);
+
 //adds event listeners to close popups
 editProfile.setEventListeners();
 addPicModal.setEventListeners();
+deleteAlert.setEventListeners();
+
+//variable to store clicked card id
+let clickedCard;
 //add event listeners to open popups
 document.addEventListener("click", (event) => {
+  //open modal to edit profile info
   if (
     event.target.classList.contains("img_button_edit") ||
     event.target.classList.contains("button_edit")
@@ -190,11 +193,39 @@ document.addEventListener("click", (event) => {
     inputAbout.value = userData.about;
     return;
   }
+  //open modal to add new photo
   if (
     event.target.classList.contains("img_button_add") ||
     event.target.classList.contains("button_add")
   ) {
     addPicModal.open();
+    return;
+  }
+  //open modal to delete card
+  if (event.target.classList.contains("button__image")) {
+    clickedCard = event.target.closest(".place__card");
+
+    const ownedCards = api.get(urlPaths.cards);
+    ownedCards
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((array) => {
+        const owned = array.filter((card) => {
+          const cardOwner = card.owner;
+          if (cardOwner._id == userData._id) {
+            return card;
+          }
+        });
+        return owned;
+      })
+      .then((owned) => {
+        if (owned.some((card) => card._id == clickedCard.id)) {
+          deleteAlert.open();
+        }
+      });
     return;
   }
 });
@@ -207,14 +238,14 @@ function handleCardClick() {
 }
 
 //delete cards
-const placeSection = document.querySelector(".places");
-placeSection.addEventListener("click", handleRemoveCard);
-function handleRemoveCard(event) {
-  if (event.target.classList.contains("button__image")) {
-    event.target.closest(".place__card").remove();
-    return;
-  }
-}
+// const placeSection = document.querySelector(".places");
+// placeSection.addEventListener("click", handleRemoveCard);
+// function handleRemoveCard(event) {
+//   if (event.target.classList.contains("button__image")) {
+//     event.target.closest(".place__card").remove();
+//     return;
+//   }
+// }
 
 //Validate forms
 const formList = Array.from(document.querySelectorAll(".popup__form"));
@@ -227,5 +258,5 @@ function deleteCard(object, test) {
   api.delete(object.cards, test);
 }
 
-const teste = "64a69d740880f709efbe4147";
+const teste = "64a7fe57a045970a303884e6";
 // deleteCard(urlPaths, teste);
