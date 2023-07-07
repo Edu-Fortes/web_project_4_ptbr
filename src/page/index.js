@@ -162,9 +162,18 @@ const deleteAlert = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
-      console.log(ownedCards);
+      // console.log(ownedCards);
       console.log(clickedCard);
       console.log(submit);
+
+      api.delete(urlPaths.cards, clickedCard.id).then((res) => {
+        if (res.ok) {
+          //delete cards
+          clickedCard.remove();
+          deleteAlert.close();
+          return;
+        }
+      });
     },
   },
   "#modal-delete"
@@ -254,9 +263,9 @@ formList.forEach((formElement) => {
   validate.enableValidation(formElement);
 });
 
-function deleteCard(object, test) {
-  api.delete(object.cards, test);
-}
+// function deleteCard(object, test) {
+//   api.delete(object.cards, test);
+// }
 
-const teste = "64a7fe57a045970a303884e6";
-// deleteCard(urlPaths, teste);
+// const teste = "64a7fe57a045970a303884e6";
+// // deleteCard(urlPaths, teste);
