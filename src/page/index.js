@@ -42,7 +42,7 @@ const userData = await api
     const nameTitle = document.querySelector(".profile__title");
     const aboutTitle = document.querySelector(".profile__subtitle");
 
-    avatarImg.src = userInfo.avatar;
+    // avatarImg.src = userInfo.avatar;
     nameTitle.textContent = userInfo.name;
     aboutTitle.textContent = userInfo.about;
     return userInfo;
@@ -214,30 +214,78 @@ document.addEventListener("click", (event) => {
   if (event.target.classList.contains("button__image")) {
     clickedCard = event.target.closest(".place__card");
 
-    const ownedCards = api.get(urlPaths.cards);
-    ownedCards
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((array) => {
-        const owned = array.filter((card) => {
-          const cardOwner = card.owner;
-          if (cardOwner._id == userData._id) {
-            return card;
+    ownedCards();
+  }
+  //button like
+  if (event.target.classList.contains("button__like")) {
+    clickedCard = event.target.closest(".place__card");
+    const teste = event.target;
+    console.log(event.target);
+    console.log(clickedCard);
+    console.log(clickedCard.id);
+    //aqui pode adicionar um IF para checar se tem a classe CSS
+    //button_like_active, caso tenha excutar o PUT da API
+    //caso não tenha exucutar o Delete da API. Usar o clickedCard
+    //para pegar o id do cartão
+
+    const likeSpan = event.target.nextElementSibling;
+    console.log(likeSpan);
+    if (event.target.classList.contains("button__like_active")) {
+      api
+        .put(urlPaths.likes, clickedCard.id)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((res) => {
+          const likesArr = res.likes;
+          likeSpan.textContent = likesArr.length;
+        });
+    } else {
+      api
+        .delete(urlPaths.likes, clickedCard.id)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((res) => {
+          const likesArr = res.likes;
+          if (likesArr.length == []) {
+            likeSpan.textContent = 0;
+          } else {
+            likeSpan.textContent = likesArr.length;
           }
         });
-        return owned;
-      })
-      .then((owned) => {
-        if (owned.some((card) => card._id == clickedCard.id)) {
-          deleteAlert.open();
-        }
-      });
-    return;
+    }
   }
 });
+//checks is the card is owned by user
+function ownedCards() {
+  api
+    .get(urlPaths.cards)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then((array) => {
+      const owned = array.filter((card) => {
+        const cardOwner = card.owner;
+        if (cardOwner._id == userData._id) {
+          return card;
+        }
+      });
+      return owned;
+    })
+    .then((owned) => {
+      if (owned.some((card) => card._id == clickedCard.id)) {
+        deleteAlert.open();
+      }
+    });
+  return;
+}
 
 //function to open popup with image, called inside Card class
 function handleCardClick() {
@@ -246,26 +294,9 @@ function handleCardClick() {
   photoModal.open(event);
 }
 
-//delete cards
-// const placeSection = document.querySelector(".places");
-// placeSection.addEventListener("click", handleRemoveCard);
-// function handleRemoveCard(event) {
-//   if (event.target.classList.contains("button__image")) {
-//     event.target.closest(".place__card").remove();
-//     return;
-//   }
-// }
-
 //Validate forms
 const formList = Array.from(document.querySelectorAll(".popup__form"));
 formList.forEach((formElement) => {
   const validate = new FormValidator(formsConfig, ".popup__form");
   validate.enableValidation(formElement);
 });
-
-// function deleteCard(object, test) {
-//   api.delete(object.cards, test);
-// }
-
-// const teste = "64a7fe57a045970a303884e6";
-// // deleteCard(urlPaths, teste);

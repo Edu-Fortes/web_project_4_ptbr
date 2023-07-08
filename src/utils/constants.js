@@ -30,6 +30,7 @@ const urlPaths = {
   authorization: "f76476c9-9b53-4968-99fe-a8b4cbde5202",
   user: "users/me",
   cards: "cards",
+  likes: "cards/likes",
 };
 
 export { selectors, formsConfig, urlPaths };

@@ -49,4 +49,13 @@ export default class Api {
       },
     });
   }
+
+  put(where, what) {
+    return fetch(`${this._baseUrl}/${where}/${what}`, {
+      method: "PUT",
+      headers: {
+        authorization: this._authorization,
+      },
+    });
+  }
 }
