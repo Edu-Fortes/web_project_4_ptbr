@@ -66,7 +66,6 @@ export default class Card {
     const isLiked = this._element
       .querySelector(".button__like")
       .classList.toggle("button__like_active");
-    console.log(isLiked);
     return isLiked;
   }
 

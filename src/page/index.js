@@ -42,7 +42,7 @@ const userData = await api
     const nameTitle = document.querySelector(".profile__title");
     const aboutTitle = document.querySelector(".profile__subtitle");
 
-    // avatarImg.src = userInfo.avatar;
+    avatarImg.src = userInfo.avatar;
     nameTitle.textContent = userInfo.name;
     aboutTitle.textContent = userInfo.about;
     return userInfo;
@@ -162,9 +162,6 @@ const deleteAlert = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
-      // console.log(ownedCards);
-      console.log(clickedCard);
-      console.log(submit);
 
       api.delete(urlPaths.cards, clickedCard.id).then((res) => {
         if (res.ok) {
@@ -179,13 +176,24 @@ const deleteAlert = new PopupWithForm(
   "#modal-delete"
 );
 
+const changeAvatar = new PopupWithForm(
+  {
+    callback: (submit) => {
+      submit.preventDefault();
+    },
+  },
+  "#avatar-modal"
+);
+
 //adds event listeners to close popups
 editProfile.setEventListeners();
 addPicModal.setEventListeners();
 deleteAlert.setEventListeners();
+changeAvatar.setEventListeners();
 
 //variable to store clicked card id
 let clickedCard;
+
 //add event listeners to open popups
 document.addEventListener("click", (event) => {
   //open modal to edit profile info
@@ -219,17 +227,8 @@ document.addEventListener("click", (event) => {
   //button like
   if (event.target.classList.contains("button__like")) {
     clickedCard = event.target.closest(".place__card");
-    const teste = event.target;
-    console.log(event.target);
-    console.log(clickedCard);
-    console.log(clickedCard.id);
-    //aqui pode adicionar um IF para checar se tem a classe CSS
-    //button_like_active, caso tenha excutar o PUT da API
-    //caso não tenha exucutar o Delete da API. Usar o clickedCard
-    //para pegar o id do cartão
 
     const likeSpan = event.target.nextElementSibling;
-    console.log(likeSpan);
     if (event.target.classList.contains("button__like_active")) {
       api
         .put(urlPaths.likes, clickedCard.id)
@@ -259,6 +258,9 @@ document.addEventListener("click", (event) => {
           }
         });
     }
+  }
+  if (event.target.classList.contains("img_avatar")) {
+    changeAvatar.open();
   }
 });
 //checks is the card is owned by user

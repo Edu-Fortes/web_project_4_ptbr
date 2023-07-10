@@ -152,7 +152,7 @@
 
       <!-- MODAL TO DELETE CARD -->
 
-      <section id="modal-delete" class="popup">
+      <section id="modal-delete" class="popup popup_opened">
         <div class="popup__container">
           <button class="button button_close" type="button">
             <img
@@ -164,6 +164,38 @@
           <form name="deleteAlert" class="popup__form popup__form_delete">
             <h2 class="popup__title">Tem certeza?</h2>
             <button class="button button_yes" type="submit">Sim</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- MODAL TO CHANGE USER AVATAR -->
+
+      <section id="avatar-modal" class="popup popup_opened">
+        <div class="popup__container">
+          <button class="button button_close" type="button">
+            <img
+              class="img img_button_close"
+              src="<%=require('./images/svg/svg_close.svg')%>"
+              alt="Ícone em forma de um X para fechar a janela de edição de perfil"
+            />
+          </button>
+          <form
+            class="popup__form popup__form_place"
+            name="changeAvatar"
+            novalidate
+          >
+            <h2 class="popup__title">Alterar a foto do perfil</h2>
+            <fieldset class="popup__input-container">
+              <input
+                id="avatar-input"
+                class="popup__input popup__input_type_img"
+                required
+                type="url"
+                placeholder="Link de imagem"
+              />
+              <span class="avatar-input-error"></span>
+            </fieldset>
+            <button class="button button_save" type="submit">Salvar</button>
           </form>
         </div>
       </section>
