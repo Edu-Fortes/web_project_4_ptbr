@@ -9,12 +9,14 @@ const selectors = {
   addBtn: ".button_add",
   pencilIcon: ".img_button_edit",
   plusIcon: ".img_button_add",
+  btnSave: ".button_save",
   btnHidde: "button_hidde",
   imgHide: "img_hide",
   skeleton: "skeleton",
   skeletonAvatar: "skeleton_avatar",
   skeletonTitle: "skeleton_title",
   skeletonSubtitle: "skeleton_subtitle",
+  loading: "loading",
 };
 //Forms Configuration Object contening CSS clases and selectors
 const formsConfig = {

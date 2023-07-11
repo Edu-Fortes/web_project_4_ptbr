@@ -101,6 +101,7 @@ const editProfile = new PopupWithForm(
     //callback funtion to handle form SUBMIT
     callback: (submit) => {
       submit.preventDefault();
+      loading.saveBtn(true);
       const dataToPatch = user.setUserInfo(selectors);
 
       api
@@ -112,8 +113,11 @@ const editProfile = new PopupWithForm(
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          editProfile.close();
+          loading.saveBtn(false);
         });
-      editProfile.close();
     },
   },
   "#profile-modal"
@@ -181,8 +185,7 @@ const changeAvatar = new PopupWithForm(
     callback: (submit) => {
       submit.preventDefault();
       const avatarUrl = { link: document.querySelector("#avatar-input").value };
-      console.log(avatarUrl);
-
+      loading.saveBtn(true);
       api
         .patch(urlPaths.changeAvatar, avatarUrl)
         .then((res) => {
@@ -196,7 +199,8 @@ const changeAvatar = new PopupWithForm(
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => loading.saveBtn(false));
       changeAvatar.close();
     },
   },

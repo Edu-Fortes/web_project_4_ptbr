@@ -8,6 +8,7 @@ export default class LoadAnimation {
     this._addBtn = document.querySelector(this._selector.addBtn);
     this._pencilIcon = document.querySelector(this._selector.pencilIcon);
     this._plusIcon = document.querySelector(this._selector.plusIcon);
+    this._btnSave = document.querySelector(this._selector.btnSave);
   }
 
   profileSection(isLoading) {
@@ -72,6 +73,16 @@ export default class LoadAnimation {
       for (let i = 0; i < 6; i++) {
         container.append(cardTemplate.content.cloneNode(true));
       }
+    }
+  }
+
+  saveBtn(isLoading) {
+    if (isLoading) {
+      this._btnSave.textContent = "Salvando";
+      this._btnSave.classList.add(this._selector.loading);
+    } else {
+      this._btnSave.textContent = "Salvar";
+      this._btnSave.classList.remove(this._selector.loading);
     }
   }
 }
