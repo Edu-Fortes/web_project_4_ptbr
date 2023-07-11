@@ -31,6 +31,7 @@ const urlPaths = {
   user: "users/me",
   cards: "cards",
   likes: "cards/likes",
+  changeAvatar: "users/me/avatar",
 };
 
 export { selectors, formsConfig, urlPaths };

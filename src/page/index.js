@@ -180,6 +180,24 @@ const changeAvatar = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
+      const avatarUrl = { link: document.querySelector("#avatar-input").value };
+      console.log(avatarUrl);
+
+      api
+        .patch(urlPaths.changeAvatar, avatarUrl)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((avatarJson) => {
+          const imgAvatar = document.querySelector(".img_avatar");
+          imgAvatar.src = avatarJson.avatar;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      changeAvatar.close();
     },
   },
   "#avatar-modal"

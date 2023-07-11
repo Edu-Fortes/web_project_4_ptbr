@@ -12,7 +12,7 @@ export default class Api {
     });
   }
 
-  patch(where, { name, about }) {
+  patch(where, { name, about, link }) {
     return fetch(`${this._baseUrl}/${where}`, {
       method: "PATCH",
       headers: {
@@ -22,6 +22,7 @@ export default class Api {
       body: JSON.stringify({
         name: name,
         about: about,
+        avatar: link,
       }),
     });
   }
