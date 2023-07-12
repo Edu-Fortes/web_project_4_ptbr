@@ -9,6 +9,8 @@ export default class LoadAnimation {
     this._pencilIcon = document.querySelector(this._selector.pencilIcon);
     this._plusIcon = document.querySelector(this._selector.plusIcon);
     this._btnSave = document.querySelector(this._selector.btnSave);
+    this._btnCreate = document.querySelector("[name='create']");
+    this._spinnerModal = document.querySelector(this._selector.spinnerModal);
   }
 
   profileSection(isLoading) {
@@ -83,6 +85,24 @@ export default class LoadAnimation {
     } else {
       this._btnSave.textContent = "Salvar";
       this._btnSave.classList.remove(this._selector.loading);
+    }
+  }
+
+  createBtn(isLoading) {
+    if (isLoading) {
+      this._btnCreate.textContent = "Criando";
+      this._btnCreate.classList.add(this._selector.loading);
+    } else {
+      this._btnCreate.textContent = "Criar";
+      this._btnCreate.classList.remove(this._selector.loading);
+    }
+  }
+
+  spinnerModal(isLoading) {
+    if (isLoading) {
+      this._spinnerModal.classList.add("popup_opened");
+    } else {
+      this._spinnerModal.classList.remove("popup_opened");
     }
   }
 }

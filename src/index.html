@@ -145,7 +145,9 @@
               />
               <span class="url-input-error"></span>
             </fieldset>
-            <button class="button button_save" type="submit">Criar</button>
+            <button name="create" class="button button_save" type="submit">
+              Criar
+            </button>
           </form>
         </div>
       </section>
@@ -165,6 +167,14 @@
             <h2 class="popup__title">Tem certeza?</h2>
             <button class="button button_yes" type="submit">Sim</button>
           </form>
+        </div>
+      </section>
+
+      <!-- MODAL LOADING -->
+
+      <section id="modal-loading" class="popup popup_opened">
+        <div class="popup__container popup__container_loading">
+          <div class="popup__spinner"></div>
         </div>
       </section>
 

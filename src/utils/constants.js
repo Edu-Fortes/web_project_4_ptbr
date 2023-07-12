@@ -17,6 +17,7 @@ const selectors = {
   skeletonTitle: "skeleton_title",
   skeletonSubtitle: "skeleton_subtitle",
   loading: "loading",
+  spinnerModal: "#modal-loading",
 };
 //Forms Configuration Object contening CSS clases and selectors
 const formsConfig = {

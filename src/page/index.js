@@ -128,6 +128,7 @@ const addPicModal = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
+      loading.createBtn(true);
 
       const addedCardData = {};
       const inputCardTitle = document.querySelector(".popup__input_type_place");
@@ -152,10 +153,13 @@ const addPicModal = new PopupWithForm(
           );
           const newCardElement = newCard.generateCard();
           document.querySelector(".place").prepend(newCardElement);
-          addPicModal.close();
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          addPicModal.close();
+          loading.createBtn(false);
         });
     },
   },
@@ -166,6 +170,7 @@ const deleteAlert = new PopupWithForm(
   {
     callback: (submit) => {
       submit.preventDefault();
+      loading.spinnerModal(true);
 
       api.delete(urlPaths.cards, clickedCard.id).then((res) => {
         if (res.ok) {
@@ -243,7 +248,7 @@ document.addEventListener("click", (event) => {
   //open modal to delete card
   if (event.target.classList.contains("button__image")) {
     clickedCard = event.target.closest(".place__card");
-
+    loading.spinnerModal(true);
     ownedCards();
   }
   //button like
@@ -307,6 +312,9 @@ function ownedCards() {
       if (owned.some((card) => card._id == clickedCard.id)) {
         deleteAlert.open();
       }
+    })
+    .finally(() => {
+      loading.spinnerModal(false);
     });
   return;
 }
