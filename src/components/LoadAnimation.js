@@ -10,6 +10,7 @@ export default class LoadAnimation {
     this._plusIcon = document.querySelector(this._selector.plusIcon);
     this._btnSave = document.querySelector(this._selector.btnSave);
     this._btnCreate = document.querySelector("[name='create']");
+    this._btnAvatar = document.querySelector("[name='avatar']");
     this._spinnerModal = document.querySelector(this._selector.spinnerModal);
   }
 
@@ -78,13 +79,28 @@ export default class LoadAnimation {
     }
   }
 
-  saveBtn(isLoading) {
-    if (isLoading) {
-      this._btnSave.textContent = "Salvando";
-      this._btnSave.classList.add(this._selector.loading);
-    } else {
-      this._btnSave.textContent = "Salvar";
-      this._btnSave.classList.remove(this._selector.loading);
+  //PRECISA VER COMO FAZER PARA ADICIONAR OS OUTROS BOTÕES DE SALVAR
+  //ESSE JEITO SÓ PEGA O BOTÃO DE SALVAR DO EDITAR PERFIL
+  saveBtn(isLoading, whichBtn) {
+    if (whichBtn == null) {
+      if (isLoading) {
+        this._btnSave.textContent = "Salvando";
+        this._btnSave.classList.add(this._selector.loading);
+      } else {
+        this._btnSave.textContent = "Salvar";
+        this._btnSave.classList.remove(this._selector.loading);
+      }
+      return;
+    }
+    if (whichBtn == "avatar") {
+      if (isLoading) {
+        this._btnAvatar.textContent = "Salvando";
+        this._btnAvatar.classList.add(this._selector.loading);
+      } else {
+        this._btnAvatar.textContent = "Salvar";
+        this._btnAvatar.classList.remove(this._selector.loading);
+      }
+      return;
     }
   }
 

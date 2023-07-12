@@ -172,14 +172,19 @@ const deleteAlert = new PopupWithForm(
       submit.preventDefault();
       loading.spinnerModal(true);
 
-      api.delete(urlPaths.cards, clickedCard.id).then((res) => {
-        if (res.ok) {
-          //delete cards
-          clickedCard.remove();
+      api
+        .delete(urlPaths.cards, clickedCard.id)
+        .then((res) => {
+          if (res.ok) {
+            //delete cards
+            clickedCard.remove();
+            return;
+          }
+        })
+        .finally(() => {
+          loading.spinnerModal(false);
           deleteAlert.close();
-          return;
-        }
-      });
+        });
     },
   },
   "#modal-delete"
@@ -190,7 +195,7 @@ const changeAvatar = new PopupWithForm(
     callback: (submit) => {
       submit.preventDefault();
       const avatarUrl = { link: document.querySelector("#avatar-input").value };
-      loading.saveBtn(true);
+      loading.saveBtn(true, "avatar");
       api
         .patch(urlPaths.changeAvatar, avatarUrl)
         .then((res) => {
@@ -205,8 +210,10 @@ const changeAvatar = new PopupWithForm(
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => loading.saveBtn(false));
-      changeAvatar.close();
+        .finally(() => {
+          changeAvatar.close();
+          loading.saveBtn(false, "avatar");
+        });
     },
   },
   "#avatar-modal"
