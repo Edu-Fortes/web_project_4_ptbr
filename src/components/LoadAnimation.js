@@ -72,10 +72,11 @@ export default class LoadAnimation {
   cardsSection(isLoading) {
     const container = document.querySelector(".place");
     const cardTemplate = document.querySelector("#cards-loading");
+    const cards = [0, 1, 2, 3, 4, 5];
     if (isLoading) {
-      for (let i = 0; i < 6; i++) {
+      cards.forEach(() => {
         container.append(cardTemplate.content.cloneNode(true));
-      }
+      });
     }
   }
 
