@@ -1,0 +1,18 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.button__count_spinner {
+  border: 0.2rem solid #a9a9a9; /* Light grey */
+  border-top: 0.2rem solid rgb(0 0 0 / 80%);
+  border-radius: 50%;
+  width: 0.46875rem;
+  height: 0.46875rem;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}

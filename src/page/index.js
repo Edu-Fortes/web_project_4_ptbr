@@ -263,6 +263,8 @@ document.addEventListener("click", (event) => {
     clickedCard = event.target.closest(".place__card");
 
     const likeSpan = event.target.nextElementSibling;
+    loading.likeSpinner(true, likeSpan);
+
     if (event.target.classList.contains("button__like_active")) {
       api
         .put(urlPaths.likes, clickedCard.id)
@@ -274,6 +276,9 @@ document.addEventListener("click", (event) => {
         .then((res) => {
           const likesArr = res.likes;
           likeSpan.textContent = likesArr.length;
+        })
+        .finally(() => {
+          loading.likeSpinner(false, likeSpan);
         });
     } else {
       api
@@ -290,6 +295,9 @@ document.addEventListener("click", (event) => {
           } else {
             likeSpan.textContent = likesArr.length;
           }
+        })
+        .finally(() => {
+          loading.likeSpinner(false, likeSpan);
         });
     }
   }

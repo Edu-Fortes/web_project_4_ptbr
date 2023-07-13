@@ -79,8 +79,6 @@ export default class LoadAnimation {
     }
   }
 
-  //PRECISA VER COMO FAZER PARA ADICIONAR OS OUTROS BOTÕES DE SALVAR
-  //ESSE JEITO SÓ PEGA O BOTÃO DE SALVAR DO EDITAR PERFIL
   saveBtn(isLoading, whichBtn) {
     if (whichBtn == null) {
       if (isLoading) {
@@ -119,6 +117,15 @@ export default class LoadAnimation {
       this._spinnerModal.classList.add("popup_opened");
     } else {
       this._spinnerModal.classList.remove("popup_opened");
+    }
+  }
+
+  likeSpinner(isLoading, counter) {
+    if (isLoading) {
+      counter.textContent = "";
+      counter.classList.add(this._selector.countSpinner);
+    } else {
+      counter.classList.remove(this._selector.countSpinner);
     }
   }
 }
