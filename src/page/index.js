@@ -23,6 +23,7 @@ const loading = new LoadAnimation(selectors);
 
 //invoke class to get/set user info
 const user = new UserInfo(selectors);
+
 //start loading animation on page load
 loading.profileSection(true);
 loading.cardsSection(true);
@@ -110,6 +111,7 @@ const editProfile = new PopupWithForm(
           if (res.ok) {
             return res.json();
           }
+          return Promise.reject(`Error: ${res.status}`);
         })
         .catch((err) => {
           console.log(err);
@@ -143,6 +145,7 @@ const addPicModal = new PopupWithForm(
           if (res.ok) {
             return res.json();
           }
+          return Promise.reject(`Error: ${res.status}`);
         })
         .then((card) => {
           const newCard = new Card(
@@ -176,10 +179,14 @@ const deleteAlert = new PopupWithForm(
         .delete(urlPaths.cards, clickedCard.id)
         .then((res) => {
           if (res.ok) {
-            //delete cards
+            //delete card
             clickedCard.remove();
             return;
           }
+          return Promise.reject(`Error: ${res.status}`);
+        })
+        .catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           loading.spinnerModal(false);
@@ -202,6 +209,7 @@ const changeAvatar = new PopupWithForm(
           if (res.ok) {
             return res.json();
           }
+          return Promise.reject(`Error: ${res.status}`);
         })
         .then((avatarJson) => {
           const imgAvatar = document.querySelector(".img_avatar");
@@ -272,10 +280,14 @@ document.addEventListener("click", (event) => {
           if (res.ok) {
             return res.json();
           }
+          return Promise.reject(`Error: ${res.status}`);
         })
         .then((res) => {
           const likesArr = res.likes;
           likeSpan.textContent = likesArr.length;
+        })
+        .catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           loading.likeSpinner(false, likeSpan);
@@ -287,6 +299,7 @@ document.addEventListener("click", (event) => {
           if (res.ok) {
             return res.json();
           }
+          return Promise.reject(`Error: ${res.status}`);
         })
         .then((res) => {
           const likesArr = res.likes;
@@ -296,16 +309,20 @@ document.addEventListener("click", (event) => {
             likeSpan.textContent = likesArr.length;
           }
         })
+        .catch((err) => {
+          console.log(err);
+        })
         .finally(() => {
           loading.likeSpinner(false, likeSpan);
         });
     }
   }
+  //open modal to change avatar
   if (event.target.classList.contains("img_avatar")) {
     changeAvatar.open();
   }
 });
-//checks is the card is owned by user
+//check if the card is owned by user
 function ownedCards() {
   api
     .get(urlPaths.cards)
@@ -313,6 +330,7 @@ function ownedCards() {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(`Error: ${res.status}`);
     })
     .then((array) => {
       const owned = array.filter((card) => {
@@ -327,6 +345,9 @@ function ownedCards() {
       if (owned.some((card) => card._id == clickedCard.id)) {
         deleteAlert.open();
       }
+    })
+    .catch((err) => {
+      console.log(err);
     })
     .finally(() => {
       loading.spinnerModal(false);

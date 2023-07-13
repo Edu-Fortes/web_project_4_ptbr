@@ -9,8 +9,8 @@ export default class LoadAnimation {
     this._pencilIcon = document.querySelector(this._selector.pencilIcon);
     this._plusIcon = document.querySelector(this._selector.plusIcon);
     this._btnSave = document.querySelector(this._selector.btnSave);
-    this._btnCreate = document.querySelector("[name='create']");
-    this._btnAvatar = document.querySelector("[name='avatar']");
+    this._btnCreate = document.querySelector(this._selector.btnCreate);
+    this._btnAvatar = document.querySelector(this._selector.btnAvatar);
     this._spinnerModal = document.querySelector(this._selector.spinnerModal);
   }
 

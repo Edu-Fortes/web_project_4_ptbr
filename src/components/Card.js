@@ -38,10 +38,12 @@ export default class Card {
     return this._element;
   }
 
+  //get card ID from server and add to element
   _setId() {
     this._element.setAttribute("id", `${this._cardId}`);
   }
 
+  //get likes from server and show on page
   _showLikes() {
     const likeCounter = this._element.querySelector(".button__count");
     if (this._likeCount == []) {
@@ -56,6 +58,7 @@ export default class Card {
     }
   }
 
+  //check if card is owned by user to show trash icon
   async _showTrashBtn() {
     if (this._owner._id != this._userData._id) {
       this._element.querySelector(".button_trash").remove();
