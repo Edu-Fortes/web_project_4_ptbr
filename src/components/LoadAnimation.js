@@ -96,6 +96,8 @@ export default class LoadAnimation {
         this._btnAvatar.classList.add(this._selector.loading);
       } else {
         this._btnAvatar.textContent = "Salvar";
+        this._btnAvatar.disabled = true;
+        this._btnAvatar.classList.add("button_disabled");
         this._btnAvatar.classList.remove(this._selector.loading);
       }
       return;
@@ -108,6 +110,8 @@ export default class LoadAnimation {
       this._btnCreate.classList.add(this._selector.loading);
     } else {
       this._btnCreate.textContent = "Criar";
+      this._btnCreate.disabled = true;
+      this._btnCreate.classList.add("button_disabled");
       this._btnCreate.classList.remove(this._selector.loading);
     }
   }
