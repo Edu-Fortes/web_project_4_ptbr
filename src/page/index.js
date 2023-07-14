@@ -8,6 +8,7 @@ import FormValidator from "../components/FormValidator.js";
 import { selectors, formsConfig, urlPaths } from "../utils/constants.js";
 import Api from "../components/Api.js";
 import LoadAnimation from "../components/LoadAnimation.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //closes all popups on page loading
 const modals = document.querySelectorAll(".popup");
@@ -31,13 +32,6 @@ loading.cardsSection(true);
 //Retrieve User Info from server and show on page
 const userData = await api
   .get(urlPaths.user)
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  })
-  //object containing user data
   .then((userInfo) => {
     const avatarImg = document.querySelector(".img_avatar");
     const nameTitle = document.querySelector(".profile__title");
@@ -58,13 +52,6 @@ const userData = await api
 //Retrieve initial cards Array from server and render on page
 api
   .get(urlPaths.cards)
-  .then((res) => {
-    if (res.ok) {
-      //return an Array of Cards object
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  })
   .then((cardsArr) => {
     //clear card loading animation to show rendered cards
     document.querySelector(".place").innerHTML = "";
@@ -107,12 +94,6 @@ const editProfile = new PopupWithForm(
 
       api
         .patch(urlPaths.user, dataToPatch)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
         .catch((err) => {
           console.log(err);
         })
@@ -141,12 +122,6 @@ const addPicModal = new PopupWithForm(
 
       api
         .post(urlPaths.cards, addedCardData)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
         .then((card) => {
           const newCard = new Card(
             card,
@@ -169,34 +144,6 @@ const addPicModal = new PopupWithForm(
   "#add-card-modal"
 );
 
-const deleteAlert = new PopupWithForm(
-  {
-    callback: (submit) => {
-      submit.preventDefault();
-      loading.spinnerModal(true);
-
-      api
-        .delete(urlPaths.cards, clickedCard.id)
-        .then((res) => {
-          if (res.ok) {
-            //delete card
-            clickedCard.remove();
-            return;
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          loading.spinnerModal(false);
-          deleteAlert.close();
-        });
-    },
-  },
-  "#modal-delete"
-);
-
 const changeAvatar = new PopupWithForm(
   {
     callback: (submit) => {
@@ -205,12 +152,6 @@ const changeAvatar = new PopupWithForm(
       loading.saveBtn(true, "avatar");
       api
         .patch(urlPaths.changeAvatar, avatarUrl)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
         .then((avatarJson) => {
           const imgAvatar = document.querySelector(".img_avatar");
           imgAvatar.src = avatarJson.avatar;
@@ -230,11 +171,7 @@ const changeAvatar = new PopupWithForm(
 //adds event listeners to close popups
 editProfile.setEventListeners();
 addPicModal.setEventListeners();
-deleteAlert.setEventListeners();
 changeAvatar.setEventListeners();
-
-//variable to store clicked card id
-let clickedCard;
 
 //add event listeners to open popups
 document.addEventListener("click", (event) => {
@@ -262,26 +199,19 @@ document.addEventListener("click", (event) => {
   }
   //open modal to delete card
   if (event.target.classList.contains("button__image")) {
-    clickedCard = event.target.closest(".place__card");
+    const clickedCard = event.target.closest(".place__card");
     loading.spinnerModal(true);
-    ownedCards();
+    ownedCards(clickedCard);
   }
   //button like
   if (event.target.classList.contains("button__like")) {
-    clickedCard = event.target.closest(".place__card");
-
+    const clickedCard = event.target.closest(".place__card");
     const likeSpan = event.target.nextElementSibling;
     loading.likeSpinner(true, likeSpan);
 
     if (event.target.classList.contains("button__like_active")) {
       api
         .put(urlPaths.likes, clickedCard.id)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
         .then((res) => {
           const likesArr = res.likes;
           likeSpan.textContent = likesArr.length;
@@ -295,12 +225,6 @@ document.addEventListener("click", (event) => {
     } else {
       api
         .delete(urlPaths.likes, clickedCard.id)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
         .then((res) => {
           const likesArr = res.likes;
           if (likesArr.length == []) {
@@ -323,15 +247,9 @@ document.addEventListener("click", (event) => {
   }
 });
 //check if the card is owned by user
-function ownedCards() {
+function ownedCards(clickedCard) {
   api
     .get(urlPaths.cards)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
     .then((array) => {
       const owned = array.filter((card) => {
         const cardOwner = card.owner;
@@ -343,7 +261,31 @@ function ownedCards() {
     })
     .then((owned) => {
       if (owned.some((card) => card._id == clickedCard.id)) {
+        const deleteAlert = new PopupWithConfirmation(
+          {
+            callback: (submit) => {
+              submit.preventDefault();
+              loading.spinnerModal(true);
+
+              api
+                .delete(urlPaths.cards, clickedCard.id)
+                .then((res) => {
+                  clickedCard.remove();
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+                .finally(() => {
+                  loading.spinnerModal(false);
+                  deleteAlert.close();
+                });
+            },
+          },
+          "#modal-delete"
+        );
+
         deleteAlert.open();
+        deleteAlert.setEventListeners();
       }
     })
     .catch((err) => {

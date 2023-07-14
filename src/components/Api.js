@@ -9,6 +9,11 @@ export default class Api {
       headers: {
         authorization: this._authorization,
       },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
@@ -24,6 +29,11 @@ export default class Api {
         about: about,
         avatar: link,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
@@ -38,6 +48,11 @@ export default class Api {
         name: name,
         link: link,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
@@ -48,6 +63,11 @@ export default class Api {
         authorization: this._authorization,
         "Content-Type": "application/json",
       },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
@@ -57,6 +77,11 @@ export default class Api {
       headers: {
         authorization: this._authorization,
       },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 }
