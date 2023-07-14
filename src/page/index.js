@@ -305,7 +305,7 @@ function handleCardClick() {
 }
 
 //Validate forms
-const formList = Array.from(document.querySelectorAll(".popup__form"));
+const formList = document.querySelectorAll(".popup__form");
 formList.forEach((formElement) => {
   const validate = new FormValidator(formsConfig, ".popup__form");
   validate.enableValidation(formElement);

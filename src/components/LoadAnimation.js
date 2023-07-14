@@ -87,6 +87,8 @@ export default class LoadAnimation {
         this._btnSave.classList.add(this._selector.loading);
       } else {
         this._btnSave.textContent = "Salvar";
+        this._btnSave.disable = true;
+        this._btnSave.classList.add("button_disabled");
         this._btnSave.classList.remove(this._selector.loading);
       }
       return;
